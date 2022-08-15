@@ -1,0 +1,76 @@
+{
+	"name": "cereza",
+	"version": "0.0.1",
+	"author": "Emilio Barradas",
+	"bin": {
+		"cereza": "bin/run"
+	},
+	"homepage": "https://github.com/EmilioBarradas/cereza",
+	"license": "MIT",
+	"main": "dist/index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/EmilioBarradas/cereza.git"
+	},
+	"files": [
+		"/bin",
+		"/dist",
+		"/npm-shrinkwrap.json",
+		"/oclif.manifest.json"
+	],
+	"dependencies": {
+		"@oclif/core": "^1",
+		"@oclif/plugin-help": "^5",
+		"client": "*"
+	},
+	"devDependencies": {
+		"@oclif/test": "^2",
+		"@types/node": "^16.9.4",
+		"eslint": "^7.32.0",
+		"eslint-config-oclif": "^4",
+		"eslint-config-oclif-typescript": "^1.0.2",
+		"globby": "^11",
+		"oclif": "^3",
+		"shx": "^0.3.3",
+		"tslib": "^2.3.1",
+		"tsx": "^3.8.0",
+		"typescript": "^4.4.3"
+	},
+	"oclif": {
+		"bin": "cereza",
+		"dirname": "cereza",
+		"commands": "./dist/commands",
+		"plugins": [
+			"@oclif/plugin-help"
+		],
+		"topicSeparator": " ",
+		"topics": {
+			"hello": {
+				"description": "Say hello to the world and others"
+			}
+		}
+	},
+	"scripts": {
+		"build": "shx rm -rf dist && tsc -b",
+		"lint": "eslint . --ext .ts --config .eslintrc",
+		"postpack": "shx rm -f oclif.manifest.json",
+		"posttest": "yarn lint",
+		"prepack": "yarn build && oclif manifest && oclif readme",
+		"test": "mocha --forbid-only \"test/**/*.test.ts\"",
+		"version": "oclif readme && git add README.md"
+	},
+	"engines": {
+		"node": ">=12.0.0"
+	},
+	"bugs": {
+		"url": "https://github.com/EmilioBarradas/cereza/issues"
+	},
+	"keywords": [
+		"oclif"
+	],
+	"types": "dist/index.d.ts",
+	"directories": {
+		"test": "test"
+	},
+	"description": ""
+}

@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "target": "ESNext",
+        "module": "NodeNext",
+        "rootDir": "src",
+        "outDir": "build",
+        "moduleResolution": "NodeNext",
+        "lib": ["ESNext", "DOM"],
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+    }
+}
