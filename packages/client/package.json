@@ -11,8 +11,10 @@
         "axios": "^0.27.2",
         "isomorphic-ws": "^5.0.0",
         "minimatch": "^5.1.0",
+        "node-fetch": "^3.2.10",
+        "undici": "^5.8.2",
         "ws": "^8.8.1",
-        "zod": "^3.17.10"
+        "zod": "^3.18.0"
     },
     "devDependencies": {
         "@types/minimatch": "^3.0.5",

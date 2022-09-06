@@ -1,129 +1,219 @@
 import { router } from "@trpc/server";
-import z from "zod";
 import { prisma } from "database/src";
+import z from "zod";
 import { docker } from "../docker";
-import { DeploymentLoggers, FileDeploymentLogger } from "../logs";
+import {
+	DeploymentLoggers,
+	FileDeploymentLogger,
+	MemoryDeploymentLogger,
+} from "../logs";
 
-const getBuildRequest = (buildId: string) => {
-    return prisma.buildRequest.findFirst({ where: { id: buildId } });
+const getProject = (projectId: string) => {
+	return prisma.project.findFirst({
+		where: { id: projectId },
+		include: { status: true },
+	});
 };
 
-const getProject = (projectId: number) => {
-    return prisma.project.findFirst({ where: { id: projectId } });
+const getLatestBuild = (projectId: string) => {
+	return prisma.build.findFirst({
+		where: {
+			projectId,
+		},
+		orderBy: {
+			createdAt: "desc",
+		},
+	});
+};
+
+const getBuild = (buildId: string) => {
+	return prisma.build.findFirst({ where: { id: buildId } });
+};
+
+const getProjectBuild = (projectId: string, buildId?: string) => {
+	return buildId === undefined
+		? getLatestBuild(projectId)
+		: getBuild(buildId);
 };
 
 export const runtimeRouter = router()
-    .mutation("startService", {
-        input: z
-            .object({
-                projectId: z.number(),
-                buildId: z.string(),
-            })
-            .refine(
-                ({ projectId }) => getProject(projectId),
-                "Project does not exist."
-            )
-            .refine(
-                ({ buildId }) => getBuildRequest(buildId),
-                "Build request not found."
-            ),
-        resolve: async ({ input: { projectId, buildId } }) => {
-            const buildRequest = await getBuildRequest(buildId);
-            const project = await getProject(projectId);
+	.query("getProcessStatus", {
+		input: z.string().refine(getProject, "Project not found."),
+		resolve: async ({ input: projectId }) => {
+			const project = await getProject(projectId);
 
-            // These checks are unnecessary.
-            if (buildRequest === null || project === null) return;
+			// This check is unnecessary.
+			if (project === null) return;
 
-            const logger = await DeploymentLoggers.of(buildId);
+			return project.status;
+		},
+	})
+	.mutation("startProcess", {
+		input: z
+			.discriminatedUnion("logToBuild", [
+				z.object({
+					logToBuild: z.literal(true),
+					projectId: z.string(),
+					buildId: z.string(),
+				}),
+				z.object({
+					logToBuild: z.literal(false),
+					projectId: z.string(),
+					buildId: z.string().optional(),
+				}),
+			])
+			.refine(
+				({ projectId }) => getProject(projectId),
+				"Project does not exist."
+			)
+			.refine(
+				({ buildId }) => buildId === undefined || getBuild(buildId),
+				"Build request not found."
+			),
+		resolve: async ({ input }) => {
+			// Discriminated union does not work if destructuring within function parameters.
+			const { projectId, buildId, logToBuild } = input;
 
-            logger.data("START_SERVICE_START");
+			const build = await getProjectBuild(projectId, buildId);
+			const project = await getProject(projectId);
 
-            const portMappings = await prisma.portMapping.findMany({
-                where: {
-                    buildRequestId: {
-                        equals: buildId,
-                    },
-                },
-            });
-            const bindings = portMappings.reduce<
-                Record<string, { HostPort: string }[]>
-            >(
-                (acc, { internal, external }) => ({
-                    ...acc,
-                    [internal]: [{ HostPort: external }],
-                }),
-                {}
-            );
+			// These checks are unnecessary.
+			if (build === null || project === null) return;
 
-            const container = await docker.createContainer({
-                name: project.name,
-                Image: buildRequest.id,
-                HostConfig: { PortBindings: bindings },
-            });
+			let logger: MemoryDeploymentLogger | undefined;
 
-            await container.start();
+			if (logToBuild) {
+				logger = await DeploymentLoggers.of(buildId);
 
-            logger.data("START_SERVICE_END");
-            logger.end();
+				logger.data("START_PROCESS_START", {
+					stream: "Starting process.\n",
+				});
+			}
 
-            const fileLogger = new FileDeploymentLogger({
-                buildId,
-                memory: logger,
-            });
+			const portMappings = await prisma.portMapping.findMany({
+				where: {
+					buildId: {
+						equals: buildId,
+					},
+				},
+			});
+			const bindings = portMappings.reduce<
+				Record<string, { HostPort: string }[]>
+			>(
+				(acc, { internal, external }) => ({
+					...acc,
+					[internal]: [{ HostPort: String(external) }],
+				}),
+				{}
+			);
 
-            fileLogger.save();
+			const container = await docker.createContainer({
+				name: project.name,
+				Image: build.id,
+				HostConfig: { PortBindings: bindings },
+			});
 
-            await prisma.buildRequest.update({
-                where: {
-                    id: buildId,
-                },
-                data: {
-                    finished: true,
-                },
-            });
+			await container.start();
 
-            DeploymentLoggers.delete(buildId);
-        },
-    })
-    .mutation("stopService", {
-        input: z
-            .object({
-                projectId: z.number(),
-                buildId: z.string().optional(),
-            })
-            .refine(
-                ({ projectId }) => getProject(projectId),
-                "Project does not exist."
-            ),
-        resolve: async ({ input: { projectId, buildId } }) => {
-            const project = await getProject(projectId);
+			if (logToBuild) {
+				logger?.data("START_PROCESS_END", {
+					stream: "Started process.\n",
+				});
+				logger?.end();
 
-            // This check is unnecessary.
-            if (project === null) return;
+				const fileLogger = new FileDeploymentLogger({
+					buildId,
+					memory: logger,
+				});
 
-            const containerInfos = await docker.listContainers();
-            const containerInfo = containerInfos.find((info) =>
-                info.Names.includes(`/${project.name}`)
-            );
+				fileLogger.save();
+			}
 
-            if (containerInfo === undefined) return;
+			if (buildId !== undefined) {
+				await prisma.build.update({
+					where: {
+						id: buildId,
+					},
+					data: {
+						finished: true,
+					},
+				});
+			}
 
-            const logger =
-                buildId !== undefined
-                    ? await DeploymentLoggers.of(buildId)
-                    : undefined;
+			if (logToBuild) {
+				DeploymentLoggers.delete(buildId);
+			}
 
-            if (logger !== undefined) {
-                logger.data("STOP_SERVICE_START");
-            }
+			await prisma.project.update({
+				where: {
+					id: projectId,
+				},
+				data: {
+					status: {
+						update: {
+							value: "Online",
+						},
+					},
+				},
+			});
+		},
+	})
+	.mutation("stopProcess", {
+		input: z
+			.object({
+				projectId: z.string(),
+				buildId: z.string().optional(),
+			})
+			.refine(
+				({ projectId }) => getProject(projectId),
+				"Project does not exist."
+			),
+		resolve: async ({ input: { projectId, buildId } }) => {
+			const project = await getProject(projectId);
 
-            const container = docker.getContainer(containerInfo.Id);
+			// This check is unnecessary.
+			if (project === null) return;
 
-            await container.stop();
-            await container.remove();
+			const containerInfos = await docker.listContainers();
+			const containerInfo = containerInfos.find((info) =>
+				info.Names.includes(`/${project.name}`)
+			);
 
-            if (logger !== undefined) {
-                logger.data("STOP_SERVICE_END");
-            }
-        },
-    });
+			if (containerInfo === undefined) return;
+
+			const logger =
+				buildId !== undefined
+					? await DeploymentLoggers.of(buildId)
+					: undefined;
+
+			if (logger !== undefined) {
+				logger.data("STOP_PROCESS_START", {
+					stream: "Stopping existing process.\n",
+				});
+			}
+
+			const container = docker.getContainer(containerInfo.Id);
+
+			await container.stop();
+			await container.remove();
+
+			if (logger !== undefined) {
+				logger.data("STOP_PROCESS_END", {
+					stream: "Stopped existing process.\n",
+				});
+			}
+
+			await prisma.project.update({
+				where: {
+					id: projectId,
+				},
+				data: {
+					status: {
+						update: {
+							value: "Offline",
+						},
+					},
+				},
+			});
+		},
+	});

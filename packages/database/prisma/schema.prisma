@@ -8,27 +8,47 @@ datasource db {
 }
 
 model Project {
-    id            Int            @id @default(autoincrement())
-    createdAt     DateTime       @default(now())
-    updatedAt     DateTime       @updatedAt
-    name          String
-    buildRequests BuildRequest[]
+    id        String        @id @default(cuid())
+    createdAt DateTime      @default(now())
+    updatedAt DateTime      @updatedAt
+    name      String        @unique
+    status    ProjectStatus @relation(fields: [statusId], references: [id])
+    statusId  Int           @unique
+    owner     UserAccount   @relation(fields: [ownerId], references: [id])
+    ownerId   String
+    builds    Build[]
 }
 
-model BuildRequest {
+model ProjectStatus {
+    id        Int      @id @default(autoincrement())
+    updatedAt DateTime @updatedAt
+    value     String   @default("Offline")
+    project   Project?
+}
+
+model UserAccount {
+    id        String    @id @default(cuid())
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    username  String
+    password  String
+    project   Project[]
+}
+
+model Build {
     id        String        @id @default(cuid())
     createdAt DateTime      @default(now())
     updatedAt DateTime      @updatedAt
     project   Project?      @relation(fields: [projectId], references: [id])
-    projectId Int?
+    projectId String?
     finished  Boolean       @default(false)
     ports     PortMapping[]
 }
 
 model PortMapping {
-    id             Int           @id @default(autoincrement())
-    internal       String
-    external       String
-    buildRequest   BuildRequest? @relation(fields: [buildRequestId], references: [id])
-    buildRequestId String?
+    id       Int     @id @default(autoincrement())
+    internal String
+    external Int
+    build    Build?  @relation(fields: [buildId], references: [id])
+    buildId  String?
 }

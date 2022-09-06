@@ -8,58 +8,58 @@ import { DeploymentLoggers } from "../logs";
 const STORAGE_DIR = "../../storage/uploads";
 
 const storeData = async (data: Buffer, buildId: string) => {
-    await mkdir(resolve(STORAGE_DIR, buildId));
-    await writeFile(resolve(STORAGE_DIR, buildId, "data"), data);
+	await mkdir(resolve(STORAGE_DIR, buildId));
+	await writeFile(resolve(STORAGE_DIR, buildId, "data"), data);
 };
 
 export const mergeStorage = (app: Express) => {
-    app.post(
-        "/api/upload",
-        async ({ headers: { "build-id": buildId } }, res, next) => {
-            if (typeof buildId !== "string") return;
+	app.post(
+		"/api/upload",
+		async ({ headers: { "build-id": buildId } }, res, next) => {
+			if (typeof buildId !== "string") return;
 
-            const buildRequest = await prisma.buildRequest.findFirst({
-                where: {
-                    id: buildId,
-                },
-            });
+			const build = await prisma.build.findFirst({
+				where: {
+					id: buildId,
+				},
+			});
 
-            if (buildRequest === null) {
-                res.sendStatus(400);
-                return;
-            }
+			if (build === null) {
+				res.sendStatus(400);
+				return;
+			}
 
-            next();
-        }
-    );
+			next();
+		}
+	);
 
-    app.post(
-        "/api/upload",
-        async ({ headers: { "build-id": buildId } }, _, next) => {
-            if (typeof buildId !== "string") return;
+	app.post(
+		"/api/upload",
+		async ({ headers: { "build-id": buildId } }, _, next) => {
+			if (typeof buildId !== "string") return;
 
-            const logger = await DeploymentLoggers.of(buildId);
+			const logger = await DeploymentLoggers.of(buildId);
 
-            logger.data("UPLOAD_START");
+			logger.data("UPLOAD_START", { stream: "Upload started.\n" });
 
-            next();
-        }
-    );
+			next();
+		}
+	);
 
-    app.use("/api/upload", bodyParser.raw({ limit: "1gb" }));
+	app.use("/api/upload", bodyParser.raw({ limit: "1gb" }));
 
-    app.post(
-        "/api/upload",
-        async ({ headers: { "build-id": buildId }, body }, res) => {
-            if (typeof buildId !== "string") return;
+	app.post(
+		"/api/upload",
+		async ({ headers: { "build-id": buildId }, body }, res) => {
+			if (typeof buildId !== "string") return;
 
-            await storeData(body, buildId);
+			await storeData(body, buildId);
 
-            const logger = await DeploymentLoggers.of(buildId);
+			const logger = await DeploymentLoggers.of(buildId);
 
-            logger.data("UPLOAD_END");
+			logger.data("UPLOAD_END", { stream: "Upload finished.\n" });
 
-            res.json({ success: true, data: {} });
-        }
-    );
+			res.json({ success: true, data: {} });
+		}
+	);
 };

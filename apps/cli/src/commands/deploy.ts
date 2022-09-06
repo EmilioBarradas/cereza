@@ -1,48 +1,24 @@
-import { Command, Flags } from "@oclif/core";
-import { deployProject } from "client/src";
-import DeploymentLogger from "client/src/logger";
-import { resolve, basename } from "path";
-
-const generateName = (directory: string) => {
-	return basename(resolve(directory));
-};
-
-const printDeploymentLogs = async (logger: DeploymentLogger) => {
-	for await (const value of logger) {
-		// console.log(value);
-	}
-};
+import { Command } from "@oclif/core";
+import { CerezaBuild } from "client/src/build";
+import { resolve } from "path";
+import { loadConfig } from "../config";
 
 export default class Deploy extends Command {
-	static args = [{ name: "directory", default: "." }, { name: "name" }];
-
-	static flags = {
-		directory: Flags.string({
-			char: "D",
-		}),
-		name: Flags.string({
-			char: "N",
-		}),
-	};
+	static description = "Deploy a new version of the application.";
 
 	async run() {
-		const { args, flags } = await this.parse(Deploy);
+		const config = await loadConfig();
+		const project = new CerezaBuild(config);
 
-		const directory = args.directory ?? flags.directory;
-		const name = args.name ?? flags.name ?? generateName(directory);
-
-		const { build } = await deployProject({
-			name,
-			directory,
+		const { buildId } = await project.build({
+			directory: resolve("."),
 			build: {
-				ports: {
-					"3000/tcp": "3000",
-				},
+				ports: config.ports,
 			},
 		});
 
-		this.log(`http://localhost:3001/project/${name}/build/${build.id}`);
-
-		await printDeploymentLogs(build.logger);
+		this.log(
+			`http://localhost:3000/projects/${config.name}/builds/${buildId}`
+		);
 	}
 }

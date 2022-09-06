@@ -21,11 +21,19 @@
 	"dependencies": {
 		"@oclif/core": "^1",
 		"@oclif/plugin-help": "^5",
-		"client": "*"
+		"chalk": "^5.0.1",
+		"client": "*",
+		"dayjs": "^1.11.5",
+		"inquirer": "^9.1.1",
+		"jwt-decode": "^3.1.2",
+		"string-template": "^1.0.0",
+		"zod": "^3.18.0"
 	},
 	"devDependencies": {
 		"@oclif/test": "^2",
+		"@types/inquirer": "^9.0.1",
 		"@types/node": "^16.9.4",
+		"@types/string-template": "^1.0.2",
 		"eslint": "^7.32.0",
 		"eslint-config-oclif": "^4",
 		"eslint-config-oclif-typescript": "^1.0.2",
@@ -44,11 +52,7 @@
 			"@oclif/plugin-help"
 		],
 		"topicSeparator": " ",
-		"topics": {
-			"hello": {
-				"description": "Say hello to the world and others"
-			}
-		}
+		"topics": {}
 	},
 	"scripts": {
 		"build": "shx rm -rf dist && tsc -b",
