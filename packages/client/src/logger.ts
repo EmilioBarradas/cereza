@@ -1,12 +1,13 @@
 import { LogEntry } from "api/src/logs";
 
 export default class DeploymentLogger {
+	private controller!: ReadableStreamController<any>;
+	private readonly id = Math.random();
 	private readonly stream = new ReadableStream({
 		start: (controller) => {
 			this.controller = controller;
 		},
 	});
-	private controller!: ReadableStreamController<any>;
 
 	public data(type: string, data = {}, timestamp = Date.now()) {
 		this.controller.enqueue({ timestamp, type, data });

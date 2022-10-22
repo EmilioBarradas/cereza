@@ -1,9 +1,7 @@
 import { Command } from "@oclif/core";
-import { CerezaUserAccount } from "client/src";
-import { readFile, writeFile } from "fs/promises";
+import { CerezaUserAccount } from "client/src/index.js";
 import inquirer from "inquirer";
-import { resolve } from "path";
-import { updateToken } from "../config";
+import { updateToken } from "../config.js";
 
 const prompt = () => {
 	return inquirer.prompt<{

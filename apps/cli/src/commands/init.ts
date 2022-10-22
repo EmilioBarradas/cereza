@@ -1,10 +1,10 @@
 import { Command, Flags } from "@oclif/core";
-import { CerezaProject, CerezaServer } from "client/src/index";
+import { CerezaProject, CerezaServer } from "client/src/index.js";
 import { existsSync } from "fs";
 import { writeFile } from "fs/promises";
 import { basename, resolve } from "path";
 import inquirer from "inquirer";
-import { getAvailableServers, getToken } from "../config";
+import { getAvailableServers, getToken } from "../config.js";
 import decodeJwt from "jwt-decode";
 
 const getBaseName = (directory: string) => {

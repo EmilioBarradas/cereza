@@ -1,5 +1,5 @@
-import { ServerCerezaConfig, ServerCerezaConfigSchema } from "./cereza.js";
-import { httpApi, wrapTRPC } from "./trpc.js";
+import { ServerCerezaConfig, ServerCerezaConfigSchema } from "./cereza";
+import { httpApi, wrapTRPC } from "./trpc";
 
 export class CerezaServer {
 	constructor(private readonly config: ServerCerezaConfig) {

@@ -4,34 +4,34 @@ import { existsSync } from "fs";
 import { readFile } from "fs/promises";
 
 export const readFileElseEmpty = async (path: string) => {
-    return existsSync(path) ? await readFile(path, "utf-8") : "";
+	return existsSync(path) ? await readFile(path, "utf-8") : "";
 };
 
 export const walkDir = async (
-    basePath: string,
-    fileCallback = (fileName: string) => {},
-    prefix = ""
+	basePath: string,
+	fileCallback = (fileName: string) => {},
+	prefix = ""
 ) => {
-    const files = await readdir(basePath, {
-        encoding: "binary",
-        withFileTypes: true,
-    });
+	const files = await readdir(basePath, {
+		encoding: "binary",
+		withFileTypes: true,
+	});
 
-    const promises = files.map((file) => {
-        if (file.isSymbolicLink()) return;
+	const promises = files.map((file) => {
+		if (file.isSymbolicLink()) return;
 
-        const prefixedName = join(prefix, file.name);
+		const prefixedName = join(prefix, file.name);
 
-        if (file.isDirectory()) {
-            return walkDir(
-                join(basePath, file.name),
-                fileCallback,
-                prefixedName
-            );
-        }
+		if (file.isDirectory()) {
+			return walkDir(
+				join(basePath, file.name),
+				fileCallback,
+				prefixedName
+			);
+		}
 
-        fileCallback(prefixedName);
-    });
+		fileCallback(prefixedName);
+	});
 
-    await Promise.allSettled(promises);
+	await Promise.allSettled(promises);
 };

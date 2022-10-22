@@ -1,7 +1,7 @@
 import { Command } from "@oclif/core";
-import { CerezaBuild } from "client/src/build";
+import { CerezaBuild } from "client/src/index.js";
 import { resolve } from "path";
-import { loadConfig } from "../config";
+import { loadConfig } from "../config.js";
 
 export default class Deploy extends Command {
 	static description = "Deploy a new version of the application.";

@@ -1,10 +1,10 @@
 import { Command } from "@oclif/core";
 import chalk from "chalk";
-import { CerezaProcess } from "client/src/index";
+import { CerezaProcess } from "client/src/index.js";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import relativeTime from "dayjs/plugin/relativeTime.js";
 import format from "string-template";
-import { configExists, loadConfig, loadDecodedTokens } from "../config";
+import { configExists, loadConfig, loadDecodedTokens } from "../config.js";
 
 dayjs.extend(relativeTime);
 

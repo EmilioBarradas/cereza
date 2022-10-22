@@ -1,4 +1,4 @@
-#!/usr/bin/env node --loader=tsx --no-warnings
+#!/usr/bin/env tsx
 
 const oclif = require("@oclif/core");
 

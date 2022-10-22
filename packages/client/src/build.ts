@@ -1,7 +1,7 @@
-import { CompleteCerezaConfig, CompleteCerezaConfigSchema } from "./cereza.js";
-import DeploymentLogger from "./logger.js";
-import { uploadDir } from "./storage.js";
-import { connectToWsApi, httpApi, wrapTRPC } from "./trpc.js";
+import { CompleteCerezaConfig, CompleteCerezaConfigSchema } from "./cereza";
+import DeploymentLogger from "./logger";
+import { uploadDir } from "./storage";
+import { connectToWsApi, httpApi, wrapTRPC } from "./trpc";
 
 interface DeployOptions {
 	projectId: string;

@@ -1,5 +1,5 @@
-import { CompleteCerezaConfig, CompleteCerezaConfigSchema } from "./cereza.js";
-import { httpApi, wrapTRPC } from "./trpc.js";
+import { CompleteCerezaConfig, CompleteCerezaConfigSchema } from "./cereza";
+import { httpApi, wrapTRPC } from "./trpc";
 
 export class CerezaProcess {
 	constructor(private readonly config: CompleteCerezaConfig) {

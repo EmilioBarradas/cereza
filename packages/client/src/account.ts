@@ -3,8 +3,8 @@ import {
 	UserAccountConfigSchema,
 	UserAccountCredentialsConfig,
 	UserAccountCredentialsConfigSchema,
-} from "./cereza.js";
-import { httpApi, wrapTRPC } from "./trpc.js";
+} from "./cereza";
+import { httpApi, wrapTRPC } from "./trpc";
 
 export class CerezaUserAccount {
 	constructor(

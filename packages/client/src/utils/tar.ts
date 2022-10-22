@@ -1,4 +1,4 @@
-import { walkDir } from "./fs.js";
+import { walkDir } from "./fs";
 import { join } from "path";
 import minimatch from "minimatch";
 import tar from "tar";

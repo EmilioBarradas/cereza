@@ -1,6 +1,6 @@
 import { CliUx, Command } from "@oclif/core";
-import { CerezaProcess } from "client/src/index";
-import { loadConfig } from "../config";
+import { CerezaProcess } from "client/src/index.js";
+import { loadConfig } from "../config.js";
 
 export default class StopProcess extends Command {
 	static description = "Stop the application.";
