@@ -1,17 +1,12 @@
 import {
 	UserAccountConfig,
 	UserAccountConfigSchema,
-	UserAccountCredentialsConfig,
 	UserAccountCredentialsConfigSchema,
 } from "./cereza";
 import { httpApi, wrapTRPC } from "./trpc";
 
 export class CerezaUserAccount {
-	constructor(
-		private readonly config:
-			| UserAccountConfig
-			| UserAccountCredentialsConfig
-	) {
+	constructor(private readonly config: UserAccountConfig) {
 		UserAccountConfigSchema.parse(this.config);
 	}
 
@@ -19,19 +14,9 @@ export class CerezaUserAccount {
 		return wrapTRPC(httpApi.query("accountExists", this.config.username));
 	}
 
-	public create() {
-		const credentials = UserAccountCredentialsConfigSchema.parse(
-			this.config
+	public delete() {
+		return wrapTRPC(
+			httpApi.mutation("deleteAccount", this.config.username)
 		);
-
-		return wrapTRPC(httpApi.mutation("createAccount", credentials));
-	}
-
-	public login() {
-		const credentials = UserAccountCredentialsConfigSchema.parse(
-			this.config
-		);
-
-		return wrapTRPC(httpApi.mutation("login", credentials));
 	}
 }

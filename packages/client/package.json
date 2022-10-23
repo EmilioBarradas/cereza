@@ -1,8 +1,11 @@
 {
 	"name": "client",
 	"version": "0.0.1",
-	"main": "index.js",
-	"scripts": {},
+	"main": "dist/index.js",
+	"types": "src/index.ts",
+	"scripts": {
+		"build": "tsc"
+	},
 	"author": "Emilio Barradas",
 	"license": "ISC",
 	"dependencies": {

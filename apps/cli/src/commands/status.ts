@@ -1,6 +1,6 @@
 import { Command } from "@oclif/core";
 import chalk from "chalk";
-import { CerezaProcess } from "client/src/index.js";
+import { CerezaProcess } from "client";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import format from "string-template";

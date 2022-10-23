@@ -1,5 +1,5 @@
 import { Command, Flags } from "@oclif/core";
-import { CerezaProject, CerezaServer } from "client/src/index.js";
+import { CerezaProject, CerezaServer } from "client";
 import { existsSync } from "fs";
 import { writeFile } from "fs/promises";
 import { basename, resolve } from "path";

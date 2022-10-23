@@ -1,5 +1,5 @@
 import { Command } from "@oclif/core";
-import { CerezaUserAccount } from "client/src/index.js";
+import { CerezaUserAccount } from "client";
 import inquirer from "inquirer";
 import { updateToken } from "../config.js";
 

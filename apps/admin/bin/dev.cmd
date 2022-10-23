@@ -1,3 +1,3 @@
 @echo off
 
-node "%~dp0\dev" %*
+node --loader=tsx "%~dp0\dev" %*

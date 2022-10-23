@@ -1,5 +1,5 @@
 import { createTRPCClient, TRPCClientError } from "@trpc/client";
-import { createWSClient, wsLink } from "@trpc/client/links/wsLink/";
+import { createWSClient, wsLink } from "@trpc/client/links/wsLink";
 import type { ApiRouter } from "api/src";
 import IsoWebSocket from "isomorphic-ws";
 import { Agent, fetch as timeoutFetch, setGlobalDispatcher } from "undici";

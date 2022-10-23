@@ -6,10 +6,8 @@ import { readFile } from "fs/promises";
 import { SignJWT, importPKCS8 } from "jose";
 import { negate } from "../utils";
 
-const privateKey = await importPKCS8(
-	await readFile("./private.key", "utf-8"),
-	"RS256"
-);
+const privateKey = (async () =>
+	importPKCS8(await readFile("./private.key", "utf-8"), "RS256"))();
 
 interface UserAccount {
 	username: string;
@@ -57,15 +55,26 @@ const createAccount = async ({
 	});
 };
 
+const deleteAccount = async (username: string) => {
+	return prisma.userAccount.delete({
+		where: {
+			username,
+		},
+	});
+};
+
 const CredentialsSchema = z.object({
 	username: z.string(),
 	password: z.string(),
 });
 
-const generateUserToken = (details: { userId: string; username: string }) => {
+const generateUserToken = async (details: {
+	userId: string;
+	username: string;
+}) => {
 	return new SignJWT(details)
 		.setProtectedHeader({ alg: "RS256" })
-		.sign(privateKey);
+		.sign(await privateKey);
 };
 
 export const accountRouter = router()
@@ -83,6 +92,15 @@ export const accountRouter = router()
 
 			return generateUserToken({ userId: id, username });
 		},
+	})
+	.mutation("deleteAccount", {
+		input: z
+			.string()
+			.refine(
+				(username) => userExistsUnsafe({ username }),
+				"A user with that username does not exist."
+			),
+		resolve: ({ input: username }) => deleteAccount(username),
 	})
 	.mutation("login", {
 		input: CredentialsSchema.refine(

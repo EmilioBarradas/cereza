@@ -1,5 +1,5 @@
 import { CliUx, Command } from "@oclif/core";
-import { CerezaProcess } from "client/src/index.js";
+import { CerezaProcess } from "client";
 import { loadConfig } from "../config.js";
 
 export default class StartProcess extends Command {

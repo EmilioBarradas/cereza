@@ -1,10 +1,8 @@
 import { Command } from "@oclif/core";
-import { CerezaUserAccount } from "client/src/index";
+import { CerezaUserAccount, CerezaUserAuthAccount } from "client";
 import inquirer from "inquirer";
 
 const prompt = () => {
-	console.log(inquirer);
-
 	return inquirer.prompt<{ password: string }>([
 		{
 			name: "password",
@@ -15,14 +13,14 @@ const prompt = () => {
 	]);
 };
 
-export default class AddUser extends Command {
-	static description = "Add a new user.";
+export default class CreateUser extends Command {
+	static description = "Create a new user.";
 	static args = [{ name: "username", required: true }];
 
 	async run() {
 		const {
 			args: { username },
-		} = await this.parse(AddUser);
+		} = await this.parse(CreateUser);
 
 		const account = new CerezaUserAccount({ username });
 
@@ -32,9 +30,9 @@ export default class AddUser extends Command {
 
 		const { password } = await prompt();
 
-		const accountCreds = new CerezaUserAccount({ username, password });
+		const authAccount = new CerezaUserAuthAccount({ username, password });
 
-		await accountCreds.create();
+		await authAccount.create();
 
 		this.log("Created user.");
 	}

@@ -1,5 +1,5 @@
 import { Command } from "@oclif/core";
-import { CerezaBuild } from "client/src/index.js";
+import { CerezaBuild } from "client";
 import { resolve } from "path";
 import { loadConfig } from "../config.js";
 
