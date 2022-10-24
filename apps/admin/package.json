@@ -63,7 +63,9 @@
 		"lint": "eslint . --ext .ts --config .eslintrc",
 		"test": "mocha --forbid-only \"test/**/*.test.ts\"",
 		"posttest": "npm run lint",
-		"import": "shx cp -r ../api/dist ./dist/api && shx cp -r ../web/.next/standalone ./dist/web",
+		"import:api": "shx cp -r ../api/dist ./dist/api && shx cp ../api/package.json ./dist/api && cd ./dist/api && npm i",
+		"import:web": "shx cp -r ../web/.next/standalone ./dist/web && cd ./dist/web && npm i",
+		"import": "npm run import:api && npm run import:web",
 		"build": "shx rm -rf dist && tsc -b && npm run import",
 		"prepack": "npm run build && oclif manifest && oclif readme",
 		"postpack": "shx rm -f oclif.manifest.json"
