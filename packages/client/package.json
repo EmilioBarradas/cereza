@@ -10,18 +10,22 @@
 	"license": "ISC",
 	"dependencies": {
 		"@trpc/client": "^9.26.2",
-		"api": "*",
+		"@trpc/server": "9.27.4",
+		"api": "workspace:*",
 		"axios": "^0.27.2",
 		"isomorphic-ws": "^5.0.0",
 		"minimatch": "^5.1.0",
 		"node-fetch": "^3.2.10",
+		"openapi-types": ">=7",
+		"tar": "^6.1.11",
 		"undici": "^5.8.2",
 		"ws": "^8.8.1",
 		"zod": "^3.18.0"
 	},
 	"devDependencies": {
 		"@types/minimatch": "^3.0.5",
+		"@types/tar": "^6.1.2",
 		"@types/ws": "^8.5.3",
-		"tsconfig": "*"
+		"tsconfig": "workspace:*"
 	}
 }

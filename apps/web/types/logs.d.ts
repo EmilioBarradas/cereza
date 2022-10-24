@@ -11,6 +11,7 @@ declare global {
 
 	interface ProcessedTextLogEntry extends TextLogEntry {
 		showTimestamp: boolean;
+		timestamp: number;
 	}
 
 	type TreeNode = {

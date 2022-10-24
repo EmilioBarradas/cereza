@@ -20,7 +20,7 @@
 		"@oclif/core": "^1.13.10",
 		"@oclif/plugin-help": "^5",
 		"chalk": "^4.1.2",
-		"client": "*"
+		"client": "workspace:*"
 	},
 	"devDependencies": {
 		"@oclif/test": "^2",
@@ -62,12 +62,12 @@
 		"version": "oclif readme && git add README.md",
 		"lint": "eslint . --ext .ts --config .eslintrc",
 		"test": "mocha --forbid-only \"test/**/*.test.ts\"",
-		"posttest": "npm run lint",
-		"import:api": "shx cp -r ../api/dist ./dist/api && shx cp ../api/package.json ./dist/api && cd ./dist/api && npm i",
-		"import:web": "shx cp -r ../web/.next/standalone ./dist/web && cd ./dist/web && npm i",
-		"import": "npm run import:api && npm run import:web",
-		"build": "shx rm -rf dist && tsc -b && npm run import",
-		"prepack": "npm run build && oclif manifest && oclif readme",
+		"posttest": "pnpm run lint",
+		"import:api": "shx cp -r ../api/dist ./dist/api && shx cp ../api/package.json ./dist/api && cd ./dist/api && pnpm i",
+		"import:web": "shx cp -r ../web/.next/standalone ./dist/web && cd ./dist/web && pnpm i",
+		"import": "pnpm run import:api && pnpm run import:web",
+		"build": "shx rm -rf dist && tsc -b && pnpm run import",
+		"prepack": "pnpm run build && oclif manifest && oclif readme",
 		"postpack": "shx rm -f oclif.manifest.json"
 	},
 	"engines": {

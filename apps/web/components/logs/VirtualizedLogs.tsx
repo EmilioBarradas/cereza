@@ -7,7 +7,7 @@ import LogTextTransformer from "@/utils/logs/transformers/text";
 import LogTimestampTransformer from "@/utils/logs/transformers/timestamp";
 import { trpc } from "@/utils/trpc";
 import { MantineNumberSize } from "@mantine/core";
-import { LogEntry } from "api/src/logs";
+import { LogEntry } from "api";
 import clone from "lodash.clone";
 import debounce from "lodash.debounce";
 import {

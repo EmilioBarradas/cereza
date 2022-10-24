@@ -49,3 +49,4 @@ process.on("SIGTERM", () => {
 });
 
 export type ApiRouter = typeof apiRouter;
+export type { LogEntry } from "./logs";
