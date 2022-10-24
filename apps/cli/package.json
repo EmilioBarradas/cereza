@@ -1,5 +1,5 @@
 {
-	"name": "cereza",
+	"name": "cli",
 	"version": "0.0.1",
 	"author": "Emilio Barradas",
 	"bin": {

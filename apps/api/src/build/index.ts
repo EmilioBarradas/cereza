@@ -1,5 +1,5 @@
 import { router, Subscription } from "@trpc/server";
-import { prisma } from "database/src";
+import { prisma } from "database";
 import { resolve } from "path";
 import z from "zod";
 import split from "split";

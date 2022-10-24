@@ -1,12 +1,14 @@
 {
-    "name": "database",
-    "version": "0.0.1",
-    "main": "index.js",
-    "type": "module",
-    "scripts": {},
-    "author": "Emilio Barradas",
-    "license": "ISC",
-    "dependencies": {
-        "@prisma/client": "^4.1.1"
-    }
+	"name": "database",
+	"version": "0.0.1",
+	"main": "dist/index.js",
+	"types": "src/index.ts",
+	"scripts": {
+		"build": "tsc"
+	},
+	"author": "Emilio Barradas",
+	"license": "ISC",
+	"dependencies": {
+		"@prisma/client": "^4.1.1"
+	}
 }

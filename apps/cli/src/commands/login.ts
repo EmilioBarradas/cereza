@@ -1,5 +1,5 @@
 import { Command } from "@oclif/core";
-import { CerezaUserAccount } from "client";
+import { CerezaUserAuthAccount } from "client";
 import inquirer from "inquirer";
 import { updateToken } from "../config.js";
 
@@ -38,7 +38,7 @@ export default class Login extends Command {
 	async run() {
 		const { server, username, password } = await prompt();
 
-		const account = new CerezaUserAccount({ username, password });
+		const account = new CerezaUserAuthAccount({ username, password });
 		const token = await account.login();
 
 		await updateToken(server, token);

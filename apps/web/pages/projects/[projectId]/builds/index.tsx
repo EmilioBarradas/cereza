@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 	};
 };
 
-const Builds: NextPage<{ project: { id: number; name: string } }> = ({
+const Builds: NextPage<{ project: { id: string; name: string } }> = ({
 	project,
 }) => {
 	const builds = trpc.useQuery(["getBuilds", project.id]);

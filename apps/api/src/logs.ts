@@ -1,4 +1,4 @@
-import { prisma } from "database/src";
+import { prisma } from "database";
 import { readFile, writeFile } from "fs/promises";
 import { EventEmitter } from "events";
 

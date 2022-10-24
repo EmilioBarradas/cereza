@@ -2,7 +2,7 @@ import type { Express } from "express";
 import bodyParser from "body-parser";
 import { resolve } from "path";
 import { writeFile, mkdir } from "fs/promises";
-import { prisma } from "database/src";
+import { prisma } from "database";
 import { DeploymentLoggers } from "../logs";
 
 const STORAGE_DIR = "../../storage/uploads";

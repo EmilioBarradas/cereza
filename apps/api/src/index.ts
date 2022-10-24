@@ -40,7 +40,7 @@ expressApp.use(cors());
 mergeStorage(expressApp);
 mergeRouters(expressApp);
 
-httpServer.listen(59213);
+httpServer.listen(59213, () => console.log("Started server on port 59213."));
 
 process.on("SIGTERM", () => {
 	wsHandler.broadcastReconnectNotification();

@@ -272,7 +272,7 @@ export const ProjectInfo: FunctionComponent<{
 						{...props[size]["name"]}
 					/>
 					<StatusIndicator
-						status={status}
+						status={status.value}
 						{...props[size]["indicator"]}
 					/>
 				</Group>
@@ -286,7 +286,7 @@ export const ProjectInfo: FunctionComponent<{
 					weight={400}
 					{...props[size]["owner"]}
 				>
-					{owner.name}
+					{owner.username}
 				</Text>
 
 				<TimeSince date={updatedAt} {...props[size]["time"]} />

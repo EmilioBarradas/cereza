@@ -1,6 +1,6 @@
 import { router } from "@trpc/server";
 import z from "zod";
-import { prisma } from "database/src";
+import { prisma } from "database";
 import { negate } from "../utils";
 
 const getProject = (name: string) => {
@@ -23,6 +23,7 @@ export const projectRouter = router()
 			return prisma.project.findMany({
 				include: {
 					owner: true,
+					status: true,
 				},
 			});
 		},

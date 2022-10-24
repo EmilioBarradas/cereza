@@ -1,9 +1,11 @@
 interface Project {
-	id: number;
+	id: string;
 	name: string;
-	status: string;
+	status: {
+		value: string;
+	};
 	updatedAt: Date;
 	owner: {
-		name: string;
+		username: string;
 	};
 }

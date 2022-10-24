@@ -1,6 +1,6 @@
 import { router } from "@trpc/server";
 import z from "zod";
-import { prisma } from "database/src";
+import { prisma } from "database";
 import { hash, compare } from "bcrypt";
 import { readFile } from "fs/promises";
 import { SignJWT, importPKCS8 } from "jose";
@@ -110,7 +110,7 @@ export const accountRouter = router()
 		resolve: async ({ input: credentials }) => {
 			const account = await getAccount(credentials);
 
-			if (account === null) return;
+			if (account === null) return "ERROR";
 
 			return generateUserToken({
 				userId: account.id,
