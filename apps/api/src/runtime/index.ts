@@ -1,5 +1,5 @@
 import { router } from "@trpc/server";
-import { prisma } from "database";
+import { prisma } from "../prisma";
 import z from "zod";
 import { docker } from "../docker";
 import {

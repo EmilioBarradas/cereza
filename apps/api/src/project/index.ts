@@ -1,6 +1,6 @@
 import { router } from "@trpc/server";
 import z from "zod";
-import { prisma } from "database";
+import { prisma } from "../prisma";
 import { negate } from "../utils";
 
 const getProject = (name: string) => {

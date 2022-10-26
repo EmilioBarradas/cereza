@@ -1,4 +1,4 @@
-import { prisma } from "database";
+import { prisma } from "./prisma";
 import { readFile, writeFile } from "fs/promises";
 import { EventEmitter } from "events";
 

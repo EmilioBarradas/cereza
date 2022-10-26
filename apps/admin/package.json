@@ -21,7 +21,8 @@
 		"@oclif/plugin-help": "^5",
 		"chalk": "^4.1.2",
 		"client": "*",
-		"inquirer": "8.0.1"
+		"inquirer": "8.0.1",
+		"oclif": "^3.2.22"
 	},
 	"devDependencies": {
 		"@oclif/test": "^2",
@@ -34,11 +35,12 @@
 		"eslint-config-oclif-typescript": "^1.0.2",
 		"globby": "^11",
 		"mocha": "^9",
-		"oclif": "^3.2.21",
+		"oclif": "^3.2.22",
 		"shx": "^0.3.3",
 		"ts-node": "^10.9.1",
 		"tslib": "^2.3.1",
-		"typescript": "^4.8.3"
+		"typescript": "^4.8.3",
+		"zx": "^7.1.1"
 	},
 	"oclif": {
 		"bin": "admin",
@@ -63,12 +65,10 @@
 		"version": "oclif readme && git add README.md",
 		"lint": "eslint . --ext .ts --config .eslintrc",
 		"test": "mocha --forbid-only \"test/**/*.test.ts\"",
-		"posttest": "pnpm run lint",
-		"import:api": "shx mkdir ./dist/api && shx cp -r ../api/dist ./dist/api/dist && shx cp -r ../api/node_modules ./dist/api/node_modules && shx cp ../api/package.json ./dist/api/package.json",
-		"import:web": "shx cp -r ../web/.next/standalone ./dist/web",
-		"import": "pnpm run import:api && pnpm run import:web",
-		"build": "shx rm -rf dist && tsc -b && pnpm run import",
-		"prepack": "pnpm run build && oclif manifest && oclif readme",
+		"posttest": "yarn run lint",
+		"build": "shx rm -rf dist && tsc -b",
+		"pretarball": "zx ../../scripts/import.mjs",
+		"prepack": "yarn run build && oclif manifest && oclif readme",
 		"postpack": "shx rm -f oclif.manifest.json"
 	},
 	"engines": {

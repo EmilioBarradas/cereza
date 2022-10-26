@@ -1,13 +1,32 @@
 import { router } from "@trpc/server";
 import z from "zod";
-import { prisma } from "database";
+import { prisma } from "../prisma";
 import { hash, compare } from "bcrypt";
 import { readFile } from "fs/promises";
-import { SignJWT, importPKCS8 } from "jose";
+import { SignJWT, importPKCS8, generateKeyPair, exportPKCS8 } from "jose";
 import { negate } from "../utils";
+import { existsSync } from "fs";
+import { writeFile } from "fs/promises";
 
-const privateKey = (async () =>
-	importPKCS8(await readFile("./private.key", "utf-8"), "RS256"))();
+const PRIVATE_KEY_PATH = "./keys/private.key";
+
+const readOrCreatePrivateKey = async () => {
+	const exists = existsSync(PRIVATE_KEY_PATH);
+
+	if (exists) {
+		return importPKCS8(await readFile(PRIVATE_KEY_PATH, "utf-8"), "ES512");
+	}
+
+	const { privateKey } = await generateKeyPair("ES512");
+
+	writeFile(PRIVATE_KEY_PATH, await exportPKCS8(privateKey));
+
+	console.log(`Generated private key at ${PRIVATE_KEY_PATH}.`);
+
+	return privateKey;
+};
+
+const privateKey = readOrCreatePrivateKey();
 
 interface UserAccount {
 	username: string;

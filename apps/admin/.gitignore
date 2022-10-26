@@ -2,10 +2,8 @@ node_modules
 /tmp
 /dist
 /lib
-/.nyc_output
 /package-lock.json
 /yarn.lock
 oclif.manifest.json
-.env
 *-debug.log
 *-error.log
