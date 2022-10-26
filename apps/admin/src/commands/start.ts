@@ -1,6 +1,8 @@
 import { Command } from "@oclif/core";
 import chalk from "chalk";
 import { spawn } from "child_process";
+import { join } from "path";
+import { cwd, argv, env } from "process";
 
 const APP_TEXT = `
      .d8888b.                                            
@@ -17,16 +19,17 @@ export default class Start extends Command {
 	async run() {
 		this.print(APP_TEXT, chalk.gray("cli"));
 
-		const nodePath = process.argv[0];
+		const nodePath = argv[0];
+		const rootPath = join(cwd(), "..");
 
 		const api = spawn(nodePath, ["."], {
 			shell: true,
-			cwd: process.env.API_PATH,
+			cwd: join(rootPath, env.API_PATH ?? ""),
 		});
 
 		const web = spawn(nodePath, ["server.js"], {
 			shell: true,
-			cwd: process.env.WEB_PATH,
+			cwd: join(rootPath, process.env.WEB_PATH ?? ""),
 		});
 
 		api.stderr.on("data", (message) =>
