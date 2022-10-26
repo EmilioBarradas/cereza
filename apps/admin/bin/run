@@ -2,8 +2,8 @@
 
 const oclif = require("@oclif/core");
 
-process.env.API_PATH = "./dist/api";
-process.env.WEB_PATH = "./dist/web";
+process.env.API_PATH = "../api";
+process.env.WEB_PATH = "../web";
 
 oclif
 	.run()

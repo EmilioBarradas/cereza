@@ -1,7 +1,7 @@
 import { Command } from "@oclif/core";
 import chalk from "chalk";
 import { spawn } from "child_process";
-import { join } from "path";
+import { join, resolve } from "path";
 import { cwd, argv, env } from "process";
 
 const APP_TEXT = `
@@ -17,20 +17,19 @@ const APP_TEXT = `
 
 export default class Start extends Command {
 	async run() {
-		this.print(APP_TEXT, chalk.gray("cli"));
-
-		const nodePath = argv[0];
-		const rootPath = join(cwd(), "..");
+		const nodePath = `"${argv[0]}"`;
 
 		const api = spawn(nodePath, ["."], {
 			shell: true,
-			cwd: join(rootPath, env.API_PATH ?? ""),
+			cwd: join(__dirname, env.API_PATH ?? ""),
 		});
 
 		const web = spawn(nodePath, ["server.js"], {
 			shell: true,
-			cwd: join(rootPath, process.env.WEB_PATH ?? ""),
+			cwd: join(__dirname, process.env.WEB_PATH ?? ""),
 		});
+
+		this.print(APP_TEXT, chalk.gray("cli"));
 
 		api.stderr.on("data", (message) =>
 			this.print(message.toString(), chalk.greenBright("api"))

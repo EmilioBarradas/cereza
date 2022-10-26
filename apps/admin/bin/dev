@@ -4,8 +4,8 @@ const oclif = require("@oclif/core");
 
 // In dev mode -> use ts-node and dev plugins
 process.env.NODE_ENV = "development";
-process.env.API_PATH = "../api";
-process.env.WEB_PATH = "../web/.next/standalone";
+process.env.API_PATH = "../../../api";
+process.env.WEB_PATH = "../../../web/.next/standalone";
 
 // In dev mode, always show stack traces
 oclif.settings.debug = true;
