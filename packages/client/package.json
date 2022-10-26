@@ -11,7 +11,7 @@
 	"dependencies": {
 		"@trpc/client": "^9.26.2",
 		"@trpc/server": "9.27.4",
-		"api": "workspace:*",
+		"api": "*",
 		"axios": "^0.27.2",
 		"isomorphic-ws": "^5.0.0",
 		"minimatch": "^5.1.0",
@@ -26,6 +26,6 @@
 		"@types/minimatch": "^3.0.5",
 		"@types/tar": "^6.1.2",
 		"@types/ws": "^8.5.3",
-		"tsconfig": "workspace:*"
+		"tsconfig": "*"
 	}
 }

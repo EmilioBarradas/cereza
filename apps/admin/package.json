@@ -20,7 +20,7 @@
 		"@oclif/core": "^1.13.10",
 		"@oclif/plugin-help": "^5",
 		"chalk": "^4.1.2",
-		"client": "workspace:*"
+		"client": "*"
 	},
 	"devDependencies": {
 		"@oclif/test": "^2",
@@ -63,8 +63,8 @@
 		"lint": "eslint . --ext .ts --config .eslintrc",
 		"test": "mocha --forbid-only \"test/**/*.test.ts\"",
 		"posttest": "pnpm run lint",
-		"import:api": "shx cp -r ../api/dist ./dist/api && shx cp ../api/package.json ./dist/api && cd ./dist/api && pnpm i",
-		"import:web": "shx cp -r ../web/.next/standalone ./dist/web && cd ./dist/web && pnpm i",
+		"import:api": "shx mkdir ./dist/api && shx cp -r ../api/dist ./dist/api/dist && shx cp -r ../api/node_modules ./dist/api/node_modules && shx cp ../api/package.json ./dist/api/package.json",
+		"import:web": "shx cp -r ../web/.next/standalone ./dist/web",
 		"import": "pnpm run import:api && pnpm run import:web",
 		"build": "shx rm -rf dist && tsc -b && pnpm run import",
 		"prepack": "pnpm run build && oclif manifest && oclif readme",

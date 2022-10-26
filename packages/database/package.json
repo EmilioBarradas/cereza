@@ -12,6 +12,6 @@
 		"@prisma/client": "^4.1.1"
 	},
 	"devDependencies": {
-		"tsconfig": "workspace:*"
+		"tsconfig": "*"
 	}
 }
