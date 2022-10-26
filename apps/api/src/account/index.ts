@@ -1,20 +1,22 @@
 import { router } from "@trpc/server";
+import { compare, hash } from "bcrypt";
+import { existsSync } from "fs";
+import { mkdir, readFile, writeFile } from "fs/promises";
+import { exportPKCS8, generateKeyPair, importPKCS8, SignJWT } from "jose";
 import z from "zod";
 import { prisma } from "../prisma";
-import { hash, compare } from "bcrypt";
-import { readFile } from "fs/promises";
-import { SignJWT, importPKCS8, generateKeyPair, exportPKCS8 } from "jose";
 import { negate } from "../utils";
-import { existsSync } from "fs";
-import { writeFile } from "fs/promises";
 
-const PRIVATE_KEY_PATH = "./keys/private.key";
+const KEY_DIR_PATH = "./keys/";
+const PRIVATE_KEY_PATH = KEY_DIR_PATH + "private.key";
 
 const readOrCreatePrivateKey = async () => {
-	const exists = existsSync(PRIVATE_KEY_PATH);
-
-	if (exists) {
+	if (existsSync(PRIVATE_KEY_PATH)) {
 		return importPKCS8(await readFile(PRIVATE_KEY_PATH, "utf-8"), "ES512");
+	}
+
+	if (!existsSync(KEY_DIR_PATH)) {
+		await mkdir(KEY_DIR_PATH);
 	}
 
 	const { privateKey } = await generateKeyPair("ES512");
