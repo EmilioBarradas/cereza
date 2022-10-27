@@ -4,9 +4,6 @@
 		"build": {
 			"dependsOn": ["^build"]
 		},
-		"admin#build": {
-			"dependsOn": ["api#build", "web#build"]
-		},
 		"dev": {}
 	}
 }
