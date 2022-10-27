@@ -57,7 +57,7 @@
 		},
 		"update": {
 			"s3": {
-				"bucket": "cereza"
+				"bucket": "cereza-admin"
 			}
 		}
 	},
