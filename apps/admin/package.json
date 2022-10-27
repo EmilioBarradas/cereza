@@ -1,10 +1,10 @@
 {
-	"name": "admin",
+	"name": "cereza_admin",
 	"version": "0.0.0",
-	"description": " ",
+	"description": "",
 	"author": "Emilio Barradas @EmilioBarradas",
 	"bin": {
-		"admin": "./bin/run"
+		"cereza_admin": "./bin/run"
 	},
 	"homepage": "https://github.com/EmilioBarradas/cereza-admin",
 	"license": "MIT",
@@ -43,8 +43,8 @@
 		"zx": "^7.1.1"
 	},
 	"oclif": {
-		"bin": "admin",
-		"dirname": "admin",
+		"bin": "cereza_admin",
+		"dirname": "cereza_admin",
 		"commands": "./dist/commands",
 		"plugins": [
 			"@oclif/plugin-help"
