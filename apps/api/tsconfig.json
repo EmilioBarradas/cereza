@@ -1,7 +1,14 @@
 {
-	"extends": "tsconfig/base.json",
 	"compilerOptions": {
+		"strict": true,
 		"rootDir": "src",
-		"outDir": "dist"
-	}
+		"outDir": "dist",
+		"target": "ESNext",
+		"module": "CommonJS",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true
+	},
+	"exclude": ["node_modules"]
 }

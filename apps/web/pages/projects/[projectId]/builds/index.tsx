@@ -8,7 +8,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
 	if (typeof projectId !== "string") return { notFound: true };
 
-	const project = await trpcClient.query("getProject", projectId);
+	const project = await trpcClient.getProject.query(projectId);
 
 	if (project === undefined) return { notFound: true };
 
@@ -22,15 +22,15 @@ export const getServerSideProps: GetServerSideProps = async ({
 const Builds: NextPage<{ project: { id: string; name: string } }> = ({
 	project,
 }) => {
-	const builds = trpc.useQuery(["getBuilds", project.id]);
+	const { isLoading, data: builds } = trpc.getBuilds.useQuery(project.id);
 
-	if (builds.isLoading) {
+	if (isLoading) {
 		return <>Loading...</>;
 	}
 
 	return (
 		<>
-			{builds.data?.map((build) => (
+			{builds?.map((build) => (
 				<div key={build.id}>
 					<Link
 						href={`/projects/${project.name}/builds/${build.id}`}

@@ -76,8 +76,8 @@ export const VirtualizedLogs: FunctionComponent<{
 		maxWait: 1000,
 	});
 
-	trpc.useSubscription(["onBuildLog", buildId], {
-		onNext: (curEntry) => {
+	trpc.onBuildLog.useSubscription(buildId, {
+		onData: (curEntry) => {
 			logFilter.current.filter(curEntry);
 		},
 	});

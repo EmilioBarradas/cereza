@@ -1,5 +1,5 @@
 export default {
-    id: "cl9jipcac0029y4u0elsei929",
+    id: "cl9x2sajo00003sjkveiqrbl3",
     name: "app",
     server: "cereza.dev",
 };

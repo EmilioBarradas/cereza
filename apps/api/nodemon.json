@@ -1,7 +1,14 @@
 {
-    "$schema": "https://json.schemastore.org/nodemon.json",
-    "watch": ["."],
-    "ext": "*",
-    "ignore": ["nodemon.json", "node_modules", "build"],
-    "exec": "tsx --no-warnings src"
+	"$schema": "https://json.schemastore.org/nodemon.json",
+	"watch": ["."],
+	"ext": "*",
+	"ignore": [
+		".turbo",
+		"dist",
+		"keys",
+		"node_modules",
+		"prisma",
+		"nodemon.json"
+	],
+	"exec": "tsx --no-warnings src"
 }

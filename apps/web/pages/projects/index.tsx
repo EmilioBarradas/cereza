@@ -13,7 +13,7 @@ const ProjectCard: FunctionComponent<{ project: Project }> = ({ project }) => {
 };
 
 const Home: NextPage = () => {
-	const { isLoading, data: projects } = trpc.useQuery(["getProjects"]);
+	const { isLoading, data: projects } = trpc.getProjects.useQuery();
 
 	if (isLoading) {
 		return <Text>Loading...</Text>;

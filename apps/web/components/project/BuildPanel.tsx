@@ -16,10 +16,7 @@ const reverse = <T extends any>(arr: T[]) => {
 export const BuildPanel: FunctionComponent<{
 	project: Project;
 }> = ({ project }) => {
-	const { isLoading, data: builds } = trpc.useQuery([
-		"getBuilds",
-		project.id,
-	]);
+	const { isLoading, data: builds } = trpc.getBuilds.useQuery(project.id);
 
 	if (isLoading) return null;
 

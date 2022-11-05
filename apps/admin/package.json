@@ -21,8 +21,7 @@
 	"devDependencies": {
 		"oclif": "^3.2.22",
 		"shx": "^0.3.3",
-		"typescript": "^4.8.3",
-		"zx": "^7.1.1"
+		"typescript": "^4.8.3"
 	},
 	"oclif": {
 		"bin": "cereza_admin",
@@ -44,7 +43,6 @@
 		"test": "mocha --forbid-only \"test/**/*.test.ts\"",
 		"posttest": "yarn run lint",
 		"build": "shx rm -rf dist && tsc -b",
-		"pretarball": "zx ../../scripts/import.mjs",
 		"prepack": "yarn run build && oclif manifest && oclif readme",
 		"postpack": "shx rm -f oclif.manifest.json"
 	},

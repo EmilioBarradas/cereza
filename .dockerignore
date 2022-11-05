@@ -1,0 +1,9 @@
+**/.vscode/
+**/.turbo/
+**/node_modules/
+**/dist/
+**/keys/
+**/.gitignore
+
+out/
+storage/

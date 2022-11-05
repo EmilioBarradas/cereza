@@ -1,0 +1,15 @@
+version: "3.9"
+name: cereza
+services:
+  api:
+    image: cerezadev/api
+    container_name: api
+    expose:
+      - 59213:59213
+    volumes:
+      - $HOME/.cereza:/app/generated
+  web:
+    image: cerezadev/web
+    container_name: web
+    expose:
+      - 3000:3000

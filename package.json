@@ -14,8 +14,8 @@
 	},
 	"devDependencies": {
 		"prettier": "latest",
-		"turbo": "latest",
-		"typescript": "^4.8.0-dev.20220804"
+		"prisma": "^4.5.0",
+		"turbo": "latest"
 	},
 	"engines": {
 		"npm": ">=7.0.0",

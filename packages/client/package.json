@@ -4,13 +4,14 @@
 	"main": "dist/index.js",
 	"types": "src/index.ts",
 	"scripts": {
+		"dev": "nodemon",
 		"build": "tsc"
 	},
 	"author": "Emilio Barradas",
 	"license": "ISC",
 	"dependencies": {
-		"@trpc/client": "^9.26.2",
-		"@trpc/server": "9.27.4",
+		"@trpc/client": "^10.0.0-rc.1",
+		"@trpc/server": "^10.0.0-rc.1",
 		"api": "*",
 		"axios": "^0.27.2",
 		"isomorphic-ws": "^5.0.0",

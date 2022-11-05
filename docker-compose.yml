@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  api:
+    image: cerezadev/api
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+  web:
+    image: cerezadev/web
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile

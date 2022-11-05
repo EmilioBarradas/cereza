@@ -1,16 +1,13 @@
-import { createReactQueryHooks } from "@trpc/react";
-import { createWSClient, wsLink } from "@trpc/client/links/wsLink/";
-import type { ApiRouter } from "api/src/index";
-import WebSocket from "isomorphic-ws";
+import { createTRPCProxyClient } from "@trpc/client";
+import { httpBatchLink } from "@trpc/client";
+import { createTRPCReact } from "@trpc/react-query";
+import type { ApiRouter } from "api";
 
-export const trpc = createReactQueryHooks<ApiRouter>();
-export const trpcClient = trpc.createClient({
-    links: [
-        wsLink({
-            client: createWSClient({
-                url: `ws://localhost:59213/`,
-                WebSocket: WebSocket as any,
-            }),
-        }),
-    ],
+export const trpc = createTRPCReact<ApiRouter>();
+export const trpcClient = createTRPCProxyClient<ApiRouter>({
+	links: [
+		httpBatchLink({
+			url: "http://localhost:59213/api",
+		}),
+	],
 });

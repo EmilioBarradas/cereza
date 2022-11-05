@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	if (typeof projectId !== "string" || typeof buildId !== "string")
 		return { notFound: true };
 
-	const build = await trpcClient.query("getBuild", buildId);
+	const build = await trpcClient.getBuild.query(buildId);
 
 	if (build === undefined) return { notFound: true };
 
