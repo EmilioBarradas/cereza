@@ -5,6 +5,10 @@
 	import Pitch from '@/components/landing/Pitch.svelte';
 </script>
 
+<svelte:head>
+    <title>Cereza</title>
+</svelte:head>
+
 <main class="pt-24 pb-8 px-24 flex flex-col relative dark:bg-zinc-900">
 	<section>
 		<Hero />

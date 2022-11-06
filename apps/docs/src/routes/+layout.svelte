@@ -4,6 +4,13 @@
 </script>
 
 <svelte:head>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Cereza 🍒" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og_image.png" />
+    <meta property="og:url" content="https://cereza.dev" />
+    <meta property="og:description" content="An open-source Docker container deployment and management system." />
+
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 	<link
