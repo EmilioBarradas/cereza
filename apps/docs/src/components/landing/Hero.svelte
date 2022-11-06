@@ -14,7 +14,7 @@
 
 	<h1 class="font-semibold text-7xl leading-normal text-[#a40e13]">Cereza</h1>
 	<p class="text-2xl font-medium max-w-[32rem]">
-		An open-source Docker container deployment and management system!
+		An open-source Docker container deployment and management system.
 	</p>
 
 	<div class="mt-8 flex gap-4 flex-wrap justify-center">
