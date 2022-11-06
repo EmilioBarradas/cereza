@@ -6,7 +6,7 @@
 
 <div class="text-center flex flex-col items-center">
 	<img
-		src="cereza_logo.png"
+		src="logo.png"
 		alt="The Cereza Logo"
 		class="h-64 w-64 select-none"
 		draggable="false"

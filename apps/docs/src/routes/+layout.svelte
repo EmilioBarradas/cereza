@@ -7,7 +7,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:title" content="Cereza 🍒" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og_image.png" />
+    <meta property="og:image" content="/open_graph.png" />
     <meta property="og:url" content="https://cereza.dev" />
     <meta property="og:description" content="An open-source Docker container deployment and management system." />
 
