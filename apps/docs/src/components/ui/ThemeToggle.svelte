@@ -2,6 +2,7 @@
 	import Sun from '../icons/Sun.svelte';
 	import { theme, type Theme } from '@/helpers/theme';
 	import { browser } from '$app/environment';
+	import Icon from './Icon.svelte';
 
 	const script = `
 
@@ -25,8 +26,8 @@
 	{@html script}
 </svelte:head>
 
-<button on:click={() => theme.toggle()}>
-	<Sun />
+<button on:click={() => theme.toggle()} class="h-6 w-6">
+    <Icon icon={Sun} height="h-6" width="w-6" />
 </button>
 
 <style>

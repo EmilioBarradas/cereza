@@ -48,9 +48,13 @@
 <div class="flex justify-center">
 	<div class="max-w-6xl grid grid-cols-3 gap-12">
 		{#each features as { title, description, icon }}
-			<div class="space-y-2">
-				<h2 class="text-2xl font-medium inline">{icon} {title}</h2>
-				<p class="text-lg">{description}</p>
+			<div class="space-y-4">
+                <span class="text-2xl font-medium dark:text-zinc-100 space-x-0.5">
+                    <h2 class="inline">{icon}</h2>
+                    <h2 class="inline">{title}</h2>
+                </span>
+
+				<p class="text-lg dark:text-zinc-200">{description}</p>
 			</div>
 		{/each}
 	</div>

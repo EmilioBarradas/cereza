@@ -9,20 +9,20 @@
     <title>Cereza</title>
 </svelte:head>
 
-<main class="pt-24 pb-8 px-24 flex flex-col relative dark:bg-zinc-900">
+<main class="pt-24 pb-8 px-24 flex flex-col relative dark:bg-zinc-900 space-y-32 transition-all">
 	<section>
 		<Hero />
 	</section>
 
-	<section class="mt-24">
+	<section>
 		<Features />
 	</section>
 
-	<section class="mt-32">
+	<section>
 		<Pitch />
 	</section>
 
-	<section class="mt-16">
+	<section>
 		<Footer />
 	</section>
 </main>
