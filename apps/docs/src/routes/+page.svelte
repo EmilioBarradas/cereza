@@ -9,7 +9,7 @@
     <title>Cereza</title>
 </svelte:head>
 
-<main class="pt-24 pb-8 px-24 flex flex-col relative dark:bg-zinc-900 space-y-32 transition-all">
+<main class="pt-24 pb-8 px-24 flex flex-col relative dark:bg-[#111] space-y-32 transition-all">
 	<section>
 		<Hero />
 	</section>
