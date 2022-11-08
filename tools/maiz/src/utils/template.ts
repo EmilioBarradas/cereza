@@ -1,4 +1,4 @@
-import { render } from "art-template";
+import art from "art-template";
 import { mkdir, writeFile, readFile } from "fs/promises";
 import { dirname } from "path";
 
@@ -10,7 +10,7 @@ export const template = async (
 	options: Options = {}
 ) => {
 	const contents = await readFile(templatePath, "utf-8");
-	const generated = render(contents, options);
+	const generated = art.render(contents, options);
 
 	await mkdir(dirname(generatedPath), { recursive: true });
 	await writeFile(generatedPath, generated);

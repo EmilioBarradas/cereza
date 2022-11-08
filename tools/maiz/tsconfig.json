@@ -2,10 +2,11 @@
 	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
 		"strict": true,
-		"module": "commonjs",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"rootDir": "src",
 		"outDir": "dist",
 		"esModuleInterop": true,
 		"jsx": "react"
-	},
-	"include": ["src"]
+	}
 }

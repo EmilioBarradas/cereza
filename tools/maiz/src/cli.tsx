@@ -2,7 +2,7 @@
 import { render } from "ink";
 import meow from "meow";
 import React from "react";
-import App from "./app";
+import App from "./app.js";
 
 const HELP_MESSAGE = `
     Usage

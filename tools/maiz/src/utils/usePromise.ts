@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { wrapError } from "./wrapError";
+import { wrapError } from "./wrapError.js";
 
 export type State<T> =
 	| { settled: false }

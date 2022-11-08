@@ -2,11 +2,11 @@ import { lstat } from "fs/promises";
 import { Box, Text } from "ink";
 import { basename, join } from "path";
 import React, { FunctionComponent, useMemo } from "react";
-import Task from "./components/Task";
-import { TaskList } from "./components/TaskList";
-import { getFiles } from "./utils/file";
-import { template } from "./utils/template";
-import { usePromise } from "./utils/usePromise";
+import Task from "./components/Task.js";
+import { TaskList } from "./components/TaskList.js";
+import { getFiles } from "./utils/file.js";
+import { template } from "./utils/template.js";
+import { usePromise } from "./utils/usePromise.js";
 
 const AppWithTasks: FunctionComponent<{
 	tasks: Task<unknown>[];

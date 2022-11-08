@@ -1,6 +1,6 @@
 import React from "react";
 import { FunctionComponent } from "react";
-import Task from "./Task";
+import Task from "./Task.js";
 
 export const TaskList: FunctionComponent<{
 	tasks: Task<unknown>[];
@@ -9,7 +9,12 @@ export const TaskList: FunctionComponent<{
 	return (
 		<>
 			{tasks.map(({ title, task }) => (
-				<Task key={title} title={title} task={task} showError={verbose} />
+				<Task
+					key={title}
+					title={title}
+					task={task}
+					showError={verbose}
+				/>
 			))}
 		</>
 	);

@@ -1,7 +1,7 @@
 import { Box, Text } from "ink";
 import React, { FunctionComponent } from "react";
-import { usePromise } from "../utils/usePromise";
-import Spinner from "./Spinner";
+import { usePromise } from "../utils/usePromise.js";
+import Spinner from "./Spinner.js";
 
 export interface Task<T> {
 	title: string;
@@ -17,7 +17,11 @@ export const Task: FunctionComponent<{
 
 	if (state.settled && state.error) {
 		return (
-			<ErrorState title={title} error={state.error} showError={showError} />
+			<ErrorState
+				title={title}
+				error={state.error}
+				showError={showError}
+			/>
 		);
 	}
 
