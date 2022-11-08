@@ -1,6 +1,6 @@
 {
 	"name": "maiz",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"license": "MIT",
 	"main": "dist/cli.js",
 	"bin": "dist/cli.js",
@@ -9,7 +9,8 @@
 		"start": "yarn build && node ."
 	},
 	"dependencies": {
-		"ink": "^3.2.0"
+		"ink": "^3.2.0",
+		"meow": "^11.0.0"
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^3.0.1",
