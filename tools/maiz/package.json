@@ -1,6 +1,6 @@
 {
 	"name": "maiz",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"type": "module",
 	"license": "MIT",
 	"main": "dist/cli.js",
@@ -12,8 +12,8 @@
 	"dependencies": {
 		"art-template": "^4.13.2",
 		"ink": "^3.2.0",
-		"meow": "9",
-		"react": "^18.2.0"
+		"meow": "^9.0.0",
+		"react": "^17.0.2"
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^3.0.1",
