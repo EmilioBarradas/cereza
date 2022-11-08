@@ -1,9 +1,9 @@
 {
 	"name": "maiz",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"license": "MIT",
-	"main": "dist/test.js",
-	"bin": "dist/test.js",
+	"main": "dist/cli.js",
+	"bin": "dist/cli.js",
 	"scripts": {
 		"build": "rm -rf dist && tsc",
 		"start": "yarn build && node ."
