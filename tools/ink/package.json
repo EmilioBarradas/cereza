@@ -1,0 +1,25 @@
+{
+	"name": "maiz",
+	"version": "0.0.7",
+	"license": "MIT",
+	"main": "dist/cli.js",
+	"bin": "dist/cli.js",
+	"scripts": {
+		"build": "rm -rf dist && tsc",
+		"start": "yarn build && node ."
+	},
+	"dependencies": {
+		"ink": "^3.2.0"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^3.0.1",
+		"@types/react": "^18.0.25",
+		"eslint-plugin-react": "^7.31.10",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"ink-testing-library": "^2.1.0",
+		"typescript": "^4.8.4"
+	},
+	"engines": {
+		"node": ">=10"
+	}
+}
