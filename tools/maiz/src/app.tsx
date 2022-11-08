@@ -13,13 +13,13 @@ const AppWithTasks: FunctionComponent<{
 	verbose?: boolean;
 }> = ({ tasks, verbose = false }) => {
 	return (
-		<>
+		<Box flexDirection="column" marginY={1}>
 			<Text underline>Template Generation</Text>
 
-			<Box flexDirection="column" marginY={1} marginX={2}>
+			<Box flexDirection="column" marginTop={1} marginX={2}>
 				<TaskList tasks={tasks} verbose={verbose} />
 			</Box>
-		</>
+		</Box>
 	);
 };
 
