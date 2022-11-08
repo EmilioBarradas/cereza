@@ -1,0 +1,6 @@
+node_modules/
+src/
+test/
+.editorconfig
+.git*
+tsconfig.json

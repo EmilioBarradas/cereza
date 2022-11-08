@@ -20,7 +20,7 @@ const readOrCreatePrivateKey = async () => {
 	return privateKey;
 };
 
-const KEY_DIR_PATH = "./keys/";
+const KEY_DIR_PATH = "./data/";
 const PRIVATE_KEY_PATH = KEY_DIR_PATH + "private.key";
 const PRIVATE_KEY = readOrCreatePrivateKey();
 

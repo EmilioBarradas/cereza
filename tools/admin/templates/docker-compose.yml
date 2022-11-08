@@ -1,0 +1,15 @@
+version: "3.9"
+name: cereza
+services:
+  api:
+    image: cerezadev/api:{{$data['api-version'] || $data['version']}}
+    container_name: api
+    expose:
+      - 59213:59213
+    volumes:
+      - $HOME/.cereza/admin:/app/data
+  web:
+    image: cerezadev/web:{{$data['web-version'] || $data['version']}}
+    container_name: web
+    expose:
+      - 3000:3000
