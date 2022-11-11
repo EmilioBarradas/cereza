@@ -1,7 +1,7 @@
 import { Box, Text } from "ink";
 import React, { FunctionComponent } from "react";
-import { usePromise } from "../utils/usePromise.js";
-import Spinner from "./Spinner.js";
+import { usePromise } from "../utils/usePromise";
+import Spinner from "./Spinner";
 
 export interface Task<T> {
 	title: string;

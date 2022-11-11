@@ -1,25 +1,53 @@
-import { lstat } from "fs/promises";
 import { Box, Text } from "ink";
 import { basename, join } from "path";
 import React, { FunctionComponent, useMemo } from "react";
-import Task from "./components/Task.js";
-import { TaskList } from "./components/TaskList.js";
-import { getFiles } from "./utils/file.js";
-import { template } from "./utils/template.js";
-import { usePromise } from "./utils/usePromise.js";
+import Task from "./components/Task";
+import { TaskList } from "./components/TaskList";
+import { Options, OptionsSchema } from "./schema";
+import { getFiles } from "./utils/file";
+import { template } from "./utils/template";
+import { usePromise } from "./utils/usePromise";
+import { ZodError } from "zod";
 
-const AppWithTasks: FunctionComponent<{
-	tasks: Task<unknown>[];
-	verbose?: boolean;
-}> = ({ tasks, verbose = false }) => {
+const App: FunctionComponent<{
+	options: Options;
+}> = ({ options: _options }) => {
+	const optionsP = useMemo(
+		() => OptionsSchema.parseAsync(_options),
+		[_options]
+	);
+	const options = usePromise<Options, ZodError<Options>>(optionsP);
+
+	if (!options.settled) return null;
+
+	if (options.failed) {
+		return (
+			<Text color="redBright">{options.error.issues[0]?.message}</Text>
+		);
+	}
+
+	return <InputValidatedApp options={options.data} />;
+};
+
+const InputValidatedApp: FunctionComponent<{
+	options: Options;
+}> = ({ options: { inDir, outDir, verbose, flags } }) => {
+	const filesP = useMemo(() => getFiles(inDir), [inDir]);
+	const files = usePromise(filesP);
+
+	if (!files.settled) return null;
+
+	if (files.failed || files.data.length === 0) {
+		return <Text>Generated 0 files.</Text>;
+	}
+
 	return (
-		<Box flexDirection="column" marginY={1}>
-			<Text underline>Template Generation</Text>
-
-			<Box flexDirection="column" marginTop={1} marginX={2}>
-				<TaskList tasks={tasks} verbose={verbose} />
-			</Box>
-		</Box>
+		<AppWithFiles
+			files={files.data}
+			outDir={outDir}
+			verbose={verbose}
+			flags={flags}
+		/>
 	);
 };
 
@@ -48,57 +76,18 @@ const AppWithFiles: FunctionComponent<{
 	return <AppWithTasks tasks={tasks} verbose={verbose} />;
 };
 
-const InputValidatedApp: FunctionComponent<{
-	inDir: string;
-	outDir: string;
+const AppWithTasks: FunctionComponent<{
+	tasks: Task<unknown>[];
 	verbose?: boolean;
-	flags?: Record<string, unknown>;
-}> = ({ inDir, outDir, verbose = false, flags = {} }) => {
-	const filesP = useMemo(() => getFiles(inDir), [inDir]);
-	const files = usePromise(filesP);
-
-	if (!files.settled) return null;
-
-	if (files.failed || files.data.length === 0) {
-		return <Text>Generated 0 files.</Text>;
-	}
-
+}> = ({ tasks, verbose = false }) => {
 	return (
-		<AppWithFiles
-			files={files.data}
-			outDir={outDir}
-			verbose={verbose}
-			flags={flags}
-		/>
-	);
-};
+		<Box flexDirection="column" marginY={1}>
+			<Text underline>Template Generation</Text>
 
-const App: FunctionComponent<{
-	inDir: string;
-	outDir: string;
-	verbose?: boolean;
-	flags?: Record<string, unknown>;
-}> = ({ inDir, outDir, verbose = false, flags = {} }) => {
-	const statP = useMemo(() => lstat(inDir), [inDir]);
-	const stat = usePromise(statP);
-
-	if (!stat.settled) return null;
-
-	if (stat.settled && stat.failed) {
-		return <Text color="redBright">Input path does not exist.</Text>;
-	}
-
-	if (stat.settled && stat.data.isFile()) {
-		return <Text color="redBright">Input path is not a directory.</Text>;
-	}
-
-	return (
-		<InputValidatedApp
-			inDir={inDir}
-			outDir={outDir}
-			verbose={verbose}
-			flags={flags}
-		/>
+			<Box flexDirection="column" marginTop={1} marginX={2}>
+				<TaskList tasks={tasks} verbose={verbose} />
+			</Box>
+		</Box>
 	);
 };
 

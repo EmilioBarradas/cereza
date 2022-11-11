@@ -1,0 +1,17 @@
+{
+	"name": "admin-installer",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"package": "tsx src/package",
+		"upload": "tsx src/upload",
+		"promote": "tsx src/promote"
+	},
+	"devDependencies": {
+		"minimist": "^1.2.7",
+		"semver-regex": "^4.0.5",
+		"tsx": "^3.11.0",
+		"zod": "^3.19.1",
+		"installer": "*"
+	}
+}

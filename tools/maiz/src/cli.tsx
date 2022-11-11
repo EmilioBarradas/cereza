@@ -1,8 +1,6 @@
 #!/usr/bin/env node
-import { render } from "ink";
 import meow from "meow";
-import React from "react";
-import App from "./app.js";
+import maiz from ".";
 
 const HELP_MESSAGE = `
     Usage
@@ -34,11 +32,9 @@ const cli = meow(HELP_MESSAGE, {
 	},
 });
 
-render(
-	<App
-		inDir={cli.flags.in}
-		outDir={cli.flags.out}
-		verbose={cli.flags.verbose}
-		flags={cli.flags}
-	/>
-);
+maiz({
+	inDir: cli.flags.in,
+	outDir: cli.flags.out,
+	verbose: cli.flags.verbose,
+	flags: cli.flags,
+});

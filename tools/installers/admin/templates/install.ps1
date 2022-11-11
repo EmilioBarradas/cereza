@@ -1,4 +1,4 @@
-$TAG = "{{version}}"
+$VERSION = "{{version}}"
 
 function Test-Path {
     param ( $entry )
@@ -16,10 +16,10 @@ function Add-Path {
 
 $ProgressPreference = 'SilentlyContinue'
 $INSTALL_DIR = "$HOME\.cereza\admin"
-$S3_URL = "https://admin.cereza.dev/releases/$TAG"
+$S3_URL = "https://admin.cereza.dev/releases/$VERSION"
 
 Write-Output "
-Installing cereza_admin@$TAG.
+Installing cereza_admin@$VERSION.
 "
 
 $null = New-Item -ItemType Directory $INSTALL_DIR 2>$1

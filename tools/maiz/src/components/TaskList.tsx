@@ -1,6 +1,6 @@
 import React from "react";
 import { FunctionComponent } from "react";
-import Task from "./Task.js";
+import Task from "./Task";
 
 export const TaskList: FunctionComponent<{
 	tasks: Task<unknown>[];

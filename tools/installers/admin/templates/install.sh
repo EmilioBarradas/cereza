@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TAG="{{version}}"
+VERSION="{{version}}"
 
 if [ "$SUDO_USER" = "" ]
 then
@@ -11,10 +11,10 @@ fi
 USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6 | head -n 1)
 INSTALL_DIR="$USER_HOME/.cereza/admin"
 BINARY_DIR="/usr/local/bin"
-S3_URL="https://admin.cereza.dev/releases/$TAG"
+S3_URL="https://admin.cereza.dev/releases/$VERSION"
 
 echo ""
-echo "Installing cereza_admin@$TAG."
+echo "Installing cereza_admin@$VERSION."
 echo ""
 
 mkdir -p $INSTALL_DIR >/dev/null 2>&1

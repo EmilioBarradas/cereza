@@ -1,0 +1,9 @@
+{
+	"name": "cli-installer",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {},
+	"devDependencies": {
+		"tsx": "^3.11.0"
+	}
+}
