@@ -31,7 +31,7 @@ const App: FunctionComponent<{
 
 const InputValidatedApp: FunctionComponent<{
 	options: Options;
-}> = ({ options: { inDir, outDir, verbose, flags } }) => {
+}> = ({ options: { inDir, outDir, verbose, data } }) => {
 	const filesP = useMemo(() => getFiles(inDir), [inDir]);
 	const files = usePromise(filesP);
 
@@ -46,7 +46,7 @@ const InputValidatedApp: FunctionComponent<{
 			files={files.data}
 			outDir={outDir}
 			verbose={verbose}
-			flags={flags}
+			data={data}
 		/>
 	);
 };
@@ -55,21 +55,20 @@ const AppWithFiles: FunctionComponent<{
 	files: string[];
 	outDir: string;
 	verbose?: boolean;
-	flags?: Record<string, unknown>;
-}> = ({ files, outDir, verbose = false, flags = {} }) => {
+	data?: Record<string, unknown>;
+}> = ({ files, outDir, verbose = false, data = {} }) => {
 	const tasks = files.map((path) => {
 		const outPath = join(outDir, basename(path));
 
-		const data = Object.entries(flags).reduce<Record<string, string>>(
-			(acc, [key, value]) => {
-				return { ...acc, [key]: String(value) };
-			},
-			{}
-		);
+		const normalizedData = Object.entries(data).reduce<
+			Record<string, string>
+		>((acc, [key, value]) => {
+			return { ...acc, [key]: String(value) };
+		}, {});
 
 		return {
 			title: outPath,
-			task: template(path, outPath, data),
+			task: template(path, outPath, normalizedData),
 		};
 	});
 

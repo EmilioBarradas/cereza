@@ -36,5 +36,5 @@ maiz({
 	inDir: cli.flags.in,
 	outDir: cli.flags.out,
 	verbose: cli.flags.verbose,
-	flags: cli.flags,
+	data: cli.flags,
 });

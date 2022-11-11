@@ -2,11 +2,12 @@ import { cp, mkdir, rm } from "fs/promises";
 import { z } from "zod";
 import { cmd } from "./utils/cmd";
 import { run } from "./utils/process";
+import maiz from "maiz";
 
 const PackSchema = z.object({
-	data: z.array(z.string(), {
+	data: z.record(z.unknown(), {
 		required_error: "Data not specified.",
-		invalid_type_error: "Data field must be an array of strings.",
+		invalid_type_error: "Data field must be a record.",
 	}),
 	templateDirs: z.array(z.string(), {
 		required_error: "Template directories not specified.",
@@ -37,7 +38,12 @@ export const pack = cmd(
 		}
 
 		for (const templateDir of templateDirs) {
-			await run(`npx maiz --in ${templateDir} --out ${outDir}`, data);
+			maiz({
+				inDir: templateDir,
+				outDir,
+				data,
+			});
+			run(`npx maiz --in ${templateDir} --out ${outDir}`, data);
 		}
 	}
 );

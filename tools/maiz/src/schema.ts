@@ -17,9 +17,9 @@ export const OptionsSchema = z.object({
 			invalid_type_error: "Verbose option must be a boolean.",
 		})
 		.default(false),
-	flags: z
+	data: z
 		.record(z.unknown(), {
-			invalid_type_error: "Flags option must be a record.",
+			invalid_type_error: "Data option must be a record.",
 		})
 		.default({}),
 });

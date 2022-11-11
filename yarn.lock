@@ -6791,15 +6791,16 @@ magic-string@^0.26.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
-maiz@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/maiz/-/maiz-0.0.14.tgz#452a9a8b2f0182b23308a351b468f27bbdfc0f5b"
-  integrity sha512-kSDe0xTUPKA7g43hswQCjtyaTXRYdGEMeCRdWj+8y8J7JAJYjtV98kHeGmYPzfmN3LS1VCnKu5ITy6lBA8aknw==
+maiz@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/maiz/-/maiz-0.0.15.tgz#95dd4f1047fba6193fcdb82a7e304c6e8f7e9f07"
+  integrity sha512-viDlJK0iWIB+29yQQIpn9rnZm10RIPPZpulwLzvO7A8XNEen9RHEAIDNb6LjRsqEi9h1dIPlhtp8LJJ8RvaEJA==
   dependencies:
     art-template "^4.13.2"
     ink "^3.2.0"
     meow "^9.0.0"
     react "^17.0.2"
+    zod "^3.19.1"
 
 make-dir@^3.0.0, make-dir@^3.1.0:
   version "3.1.0"
