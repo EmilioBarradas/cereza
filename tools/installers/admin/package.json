@@ -12,6 +12,7 @@
 		"semver-regex": "^4.0.5",
 		"tsx": "^3.11.0",
 		"zod": "^3.19.1",
-		"installer": "*"
+		"installer": "*",
+		"bin": "*"
 	}
 }

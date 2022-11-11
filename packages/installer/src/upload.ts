@@ -9,7 +9,7 @@ import { posix, sep } from "path";
 import { z } from "zod";
 import { cmd } from "./utils/cmd";
 import { walkDir } from "./utils/fs";
-import { error } from "./utils/log";
+import { wrapError } from "./utils/wrapError";
 
 const UploadSchema = z.object({
 	region: z.string({
@@ -24,7 +24,7 @@ const UploadSchema = z.object({
 		required_error: "Version not specified.",
 		invalid_type_error: "Version must be a string.",
 	}),
-	dir: z.string({
+	inDir: z.string({
 		required_error: "Directory not specified.",
 		invalid_type_error: "Directory must be a string.",
 	}),
@@ -32,7 +32,7 @@ const UploadSchema = z.object({
 
 export const upload = cmd(
 	UploadSchema,
-	async ({ region, bucket, version, dir }) => {
+	async ({ region, bucket, version, inDir }) => {
 		const client = new S3Client({ region });
 
 		const objs = await client.send(
@@ -44,23 +44,31 @@ export const upload = cmd(
 		);
 
 		if (objs.Contents !== undefined) {
-			return error("A release with that version already exists.");
+			throw new Error("A release with that version already exists.");
 		}
 
-		await walkDir(dir, async (path) => {
+		const uploadFile = async (path: string) => {
 			const remotePath = path.split(sep).slice(1).join(posix.sep);
-			const contents = await readFile(path);
+			const fileRes = await wrapError(readFile(path));
+
+			if (fileRes.failed) return;
 
 			await client.send(
 				new PutObjectCommand({
 					Bucket: bucket,
 					Key: `releases/${version}/${remotePath}`,
-					Body: contents,
+					Body: fileRes.data,
 					ContentMD5: createHash("md5")
-						.update(contents)
+						.update(fileRes.data)
 						.digest("base64"),
 				})
 			);
-		});
+		};
+
+		const walkRes = await wrapError(walkDir(inDir, uploadFile));
+
+		if (walkRes.failed) {
+			throw new Error(`Could not walk directory: ${inDir}.`);
+		}
 	}
 );

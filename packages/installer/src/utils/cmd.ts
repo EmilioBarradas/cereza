@@ -1,17 +1,17 @@
 import { z } from "zod";
-import { error } from "./log";
 
-export const cmd = <T extends z.ZodTypeAny>(
+export const cmd = <T extends z.ZodTypeAny, U>(
 	schema: T,
-	cb: (input: z.input<T>) => void
+	cb: (input: z.input<T>) => U
 ) => {
 	return (input: z.input<T>) => {
 		const res = schema.safeParse(input);
 
-		if (!res.success) {
-			return error(res.error.issues[0].message);
+		// Typescript v4.8.4 does not properly infer the discriminated union if using (!res.success).
+		if (res.success == false) {
+			throw new Error(res.error.issues[0].message);
 		}
 
-		cb(res.data);
+		return cb(res.data);
 	};
 };

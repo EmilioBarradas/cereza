@@ -1,8 +1,8 @@
 import { cp, mkdir, rm } from "fs/promises";
 import { z } from "zod";
 import { cmd } from "./utils/cmd";
-import { run } from "./utils/process";
 import maiz from "maiz";
+import { wrapError } from "./utils/wrapError";
 
 const PackSchema = z.object({
 	data: z.record(z.unknown(), {
@@ -30,12 +30,29 @@ const PackSchema = z.object({
 export const pack = cmd(
 	PackSchema,
 	async ({ outDir, templateDirs, staticDirs, data }) => {
-		await rm(outDir, { recursive: true, force: true });
-		await mkdir(outDir, { recursive: true });
+		const rmRes = await wrapError(
+			rm(outDir, { recursive: true, force: true })
+		);
 
-		for (const staticDir of staticDirs) {
-			await cp(staticDir, outDir, { recursive: true });
+		if (rmRes.failed) {
+			throw new Error(`Could not delete output directory: '${outDir}'.`);
 		}
+
+		const mkdirRes = await wrapError(mkdir(outDir, { recursive: true }));
+
+		if (mkdirRes.failed) {
+			throw new Error(`Could not create output directory: '${outDir}'.`);
+		}
+
+		const cpPromises = staticDirs.map(async (dir) => {
+			const cpRes = await wrapError(cp(dir, outDir, { recursive: true }));
+
+			if (!cpRes.failed) return;
+
+			throw new Error(`Could not copy static directory: '${dir}'.`);
+		});
+
+		await Promise.all(cpPromises);
 
 		for (const templateDir of templateDirs) {
 			maiz({
@@ -43,7 +60,6 @@ export const pack = cmd(
 				outDir,
 				data,
 			});
-			run(`npx maiz --in ${templateDir} --out ${outDir}`, data);
 		}
 	}
 );

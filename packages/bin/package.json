@@ -1,20 +1,24 @@
 {
-	"name": "installer",
+	"name": "bin",
 	"version": "0.0.0",
 	"private": true,
-	"main": "dist/index.js",
+	"bin": "dist/index.js",
 	"typings": "src/index.ts",
 	"scripts": {
 		"dev": "nodemon",
 		"build": "shx rm -rf dist && tsc"
 	},
 	"dependencies": {
-		"@aws-sdk/client-s3": "^3.204.0",
-		"chalk": "^4.1.2",
+		"@oclif/core": "^1.20.4",
 		"maiz": "^0.0.18",
+		"semver-regex": "3.1.4",
 		"zod": "^3.19.1"
 	},
 	"devDependencies": {
+		"nodemon": "^2.0.20",
 		"shx": "^0.3.4"
+	},
+	"oclif": {
+		"commands": "./dist/commands/public"
 	}
 }
