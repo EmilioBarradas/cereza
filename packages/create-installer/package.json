@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"inquirer": "^9.1.4",
-		"maiz": "^0.0.19"
-	}
+		"maiz": "workspace:*"
+	},
+	"packageManager": "yarn@3.2.4"
 }

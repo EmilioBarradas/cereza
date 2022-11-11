@@ -1,8 +1,10 @@
 {
-	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
 		"strict": true,
 		"rootDir": "src",
-		"outDir": "dist"
+		"outDir": "dist",
+		"declaration": true,
+		"esModuleInterop": true,
+		"jsx": "react"
 	}
 }

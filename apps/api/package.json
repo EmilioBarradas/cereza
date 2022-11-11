@@ -8,11 +8,6 @@
 		"dev": "nodemon",
 		"build": "prisma db push && tsc"
 	},
-	"workspaces": {
-		"nohoist": [
-			"**"
-		]
-	},
 	"dependencies": {
 		"@prisma/client": "^4.5.0",
 		"@trpc/server": "^10.0.0-rc.1",
@@ -41,8 +36,9 @@
 		"@types/ws": "^8.5.3",
 		"nodemon": "^2.0.19",
 		"prisma": "^4.5.0",
-		"tsconfig": "*",
+		"tsconfig": "workspace:*",
 		"tsx": "^3.8.0",
 		"typescript": "^4.8.4"
-	}
+	},
+	"packageManager": "yarn@3.2.4"
 }

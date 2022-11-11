@@ -42,19 +42,19 @@ const main = async () => {
 
 	await cp(
 		resolve(MODULE_ROOT, "stubs", "installer.stub.js"),
-		"installer.js"
+		resolve(path, "installer.js")
 	);
 
-	await maiz({
-		inDir: ".",
-		outDir: ".",
-		data: { awsRegion, awsBucket },
-	});
+	console.log(maiz);
 
-	// Run maiz using awsRegion and awsBucket.
+	// await maiz({
+	// 	inDir: path,
+	// 	outDir: path,
+	// 	data: { awsRegion, awsBucket },
+	// });
 
-	// Create templates directory.
-	// Create static directory.
+	await mkdir(resolve(path, "templates"));
+	await mkdir(resolve(path, "static"));
 
 	console.log("Done.");
 };

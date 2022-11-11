@@ -8,11 +8,12 @@
 		"promote": "tsx src/promote"
 	},
 	"devDependencies": {
+		"bin": "workspace:*",
+		"installer": "workspace:*",
 		"minimist": "^1.2.7",
 		"semver-regex": "^4.0.5",
 		"tsx": "^3.11.0",
-		"zod": "^3.19.1",
-		"installer": "*",
-		"bin": "*"
-	}
+		"zod": "^3.19.1"
+	},
+	"packageManager": "yarn@3.2.4"
 }

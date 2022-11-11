@@ -11,10 +11,11 @@
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.204.0",
 		"chalk": "^4.1.2",
-		"maiz": "^0.0.18",
+		"maiz": "workspace:*",
 		"zod": "^3.19.1"
 	},
 	"devDependencies": {
 		"shx": "^0.3.4"
-	}
+	},
+	"packageManager": "yarn@3.2.4"
 }

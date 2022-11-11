@@ -23,7 +23,7 @@
 		"@oclif/core": "^1",
 		"@oclif/plugin-help": "^5",
 		"chalk": "^5.0.1",
-		"client": "*",
+		"client": "workspace:*",
 		"dayjs": "^1.11.5",
 		"inquirer": "^9.1.1",
 		"jwt-decode": "^3.1.2",
@@ -77,5 +77,6 @@
 	"directories": {
 		"test": "test"
 	},
-	"description": ""
+	"description": "",
+	"packageManager": "yarn@3.2.4"
 }
