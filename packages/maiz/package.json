@@ -3,7 +3,8 @@
 	"version": "0.0.0",
 	"private": true,
 	"license": "MIT",
-	"main": "dist/index.js",
+	"typings": "src/index.tsx",
+	"main": "src/index.tsx",
 	"bin": "dist/cli.js",
 	"scripts": {
 		"build": "shx rm -rf dist && tsc",

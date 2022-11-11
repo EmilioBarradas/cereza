@@ -3587,9 +3587,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"admin-installer@workspace:tools/installers/admin":
+"admin-installer@workspace:packages/installers/admin":
   version: 0.0.0-use.local
-  resolution: "admin-installer@workspace:tools/installers/admin"
+  resolution: "admin-installer@workspace:packages/installers/admin"
   dependencies:
     bin: "workspace:*"
     installer: "workspace:*"
@@ -4800,6 +4800,7 @@ __metadata:
     minimatch: ^5.1.0
     node-fetch: ^3.2.10
     openapi-types: ">=7"
+    shx: ^0.3.4
     tar: ^6.1.11
     tsconfig: "workspace:*"
     undici: ^5.8.2
@@ -8891,9 +8892,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"maiz@workspace:*, maiz@workspace:tools/maiz":
+"maiz@workspace:*, maiz@workspace:packages/maiz":
   version: 0.0.0-use.local
-  resolution: "maiz@workspace:tools/maiz"
+  resolution: "maiz@workspace:packages/maiz"
   dependencies:
     "@sindresorhus/tsconfig": ^3.0.1
     "@types/react": ^18.0.25

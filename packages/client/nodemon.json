@@ -1,7 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/nodemon.json",
-	"watch": ["."],
+	"watch": ["src", "package.json", "tsconfig.json"],
 	"ext": "*",
-	"ignore": ["nodemon.json", "node_modules", "dist"],
-	"exec": "shx rm -rf dist && tsc"
+	"exec": "yarn build"
 }

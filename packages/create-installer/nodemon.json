@@ -1,7 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/nodemon.json",
-	"watch": ["."],
+	"watch": ["src", "package.json", "tsconfig.json"],
 	"ext": "*",
-	"ignore": [".turbo", "node_modules", "dist", "nodemon.json"],
 	"exec": "yarn build"
 }
