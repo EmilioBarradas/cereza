@@ -3,9 +3,9 @@ import { error } from "./log";
 
 export const cmd = <T extends z.ZodTypeAny>(
 	schema: T,
-	cb: (input: z.infer<T>) => void
+	cb: (input: z.input<T>) => void
 ) => {
-	return (input: z.infer<T>) => {
+	return (input: z.input<T>) => {
 		const res = schema.safeParse(input);
 
 		if (!res.success) {

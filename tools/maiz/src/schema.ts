@@ -24,4 +24,4 @@ export const OptionsSchema = z.object({
 		.default({}),
 });
 
-export type Options = z.infer<typeof OptionsSchema>;
+export type Options = z.input<typeof OptionsSchema>;

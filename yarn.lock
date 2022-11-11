@@ -6791,10 +6791,10 @@ magic-string@^0.26.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
-maiz@^0.0.15:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/maiz/-/maiz-0.0.15.tgz#95dd4f1047fba6193fcdb82a7e304c6e8f7e9f07"
-  integrity sha512-viDlJK0iWIB+29yQQIpn9rnZm10RIPPZpulwLzvO7A8XNEen9RHEAIDNb6LjRsqEi9h1dIPlhtp8LJJ8RvaEJA==
+maiz@^0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/maiz/-/maiz-0.0.16.tgz#cada5897ab0721999fa8d0f9d8b05d41f601d138"
+  integrity sha512-Ziybdw/ZEXouS7qE65hn11QkSO0SEwKpe1Z8kRTLGzdmgqV5B7zDRzcmOaSW0OHl265y1jaQhJwoc5oJKCYM+Q==
   dependencies:
     art-template "^4.13.2"
     ink "^3.2.0"
