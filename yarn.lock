@@ -3591,12 +3591,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "admin-installer@workspace:packages/installers/admin"
   dependencies:
-    bin: "workspace:*"
-    installer: "workspace:*"
-    minimist: ^1.2.7
-    semver-regex: ^4.0.5
-    tsx: ^3.11.0
-    zod: ^3.19.1
+    packer: "workspace:*"
   languageName: unknown
   linkType: soft
 
@@ -4167,21 +4162,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bin@workspace:*, bin@workspace:packages/bin":
-  version: 0.0.0-use.local
-  resolution: "bin@workspace:packages/bin"
-  dependencies:
-    "@oclif/core": ^1.20.4
-    maiz: "workspace:*"
-    nodemon: ^2.0.20
-    semver-regex: 3.1.4
-    shx: ^0.3.4
-    zod: ^3.19.1
-  bin:
-    bin: dist/index.js
-  languageName: unknown
-  linkType: soft
-
 "binary-extensions@npm:^2.0.0":
   version: 2.2.0
   resolution: "binary-extensions@npm:2.2.0"
@@ -4260,6 +4240,18 @@ __metadata:
   checksum: 29c3f01f22e703fa6644fc3b684307442df4240b6e10f6cfe1b61c6ca5721073189ca97cdeedb376081148c8518e33b1d818a57f781d70b0b70e1f31fb48814f
   languageName: node
   linkType: hard
+
+"box@workspace:*, box@workspace:packages/box":
+  version: 0.0.0-use.local
+  resolution: "box@workspace:packages/box"
+  dependencies:
+    "@aws-sdk/client-s3": ^3.204.0
+    chalk: ^4.1.2
+    maiz: "workspace:*"
+    shx: ^0.3.4
+    zod: ^3.19.1
+  languageName: unknown
+  linkType: soft
 
 "brace-expansion@npm:^1.1.7":
   version: 1.1.11
@@ -4698,6 +4690,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cli-installer@workspace:packages/installers/cli":
+  version: 0.0.0-use.local
+  resolution: "cli-installer@workspace:packages/installers/cli"
+  dependencies:
+    packer: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "cli-progress@npm:^3.10.0":
   version: 3.11.2
   resolution: "cli-progress@npm:3.11.2"
@@ -5130,15 +5130,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-installer@workspace:packages/create-installer":
+"create-box@workspace:packages/create-box":
   version: 0.0.0-use.local
-  resolution: "create-installer@workspace:packages/create-installer"
+  resolution: "create-box@workspace:packages/create-box"
   dependencies:
+    chalk: ^5.1.2
     inquirer: ^9.1.4
     maiz: "workspace:*"
     shx: ^0.3.4
   bin:
-    create-installer: dist/index.js
+    create-box: dist/index.js
   languageName: unknown
   linkType: soft
 
@@ -8019,18 +8020,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"installer@workspace:*, installer@workspace:packages/installer":
-  version: 0.0.0-use.local
-  resolution: "installer@workspace:packages/installer"
-  dependencies:
-    "@aws-sdk/client-s3": ^3.204.0
-    chalk: ^4.1.2
-    maiz: "workspace:*"
-    shx: ^0.3.4
-    zod: ^3.19.1
-  languageName: unknown
-  linkType: soft
-
 "internal-slot@npm:^1.0.3":
   version: 1.0.3
   resolution: "internal-slot@npm:1.0.3"
@@ -10219,6 +10208,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"packer@workspace:*, packer@workspace:packages/packer":
+  version: 0.0.0-use.local
+  resolution: "packer@workspace:packages/packer"
+  dependencies:
+    "@oclif/core": ^1.20.4
+    box: "workspace:*"
+    maiz: "workspace:*"
+    minimist: ^1.2.7
+    nodemon: ^2.0.20
+    semver-regex: 3.1.4
+    shx: ^0.3.4
+    zod: ^3.19.1
+  bin:
+    packer: dist/index.js
+  languageName: unknown
+  linkType: soft
+
 "pacote@npm:^12.0.0, pacote@npm:^12.0.2":
   version: 12.0.3
   resolution: "pacote@npm:12.0.3"
@@ -11727,13 +11733,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver-regex@npm:^4.0.5":
-  version: 4.0.5
-  resolution: "semver-regex@npm:4.0.5"
-  checksum: b9e5c0573c4a997fb7e6e76321385d254797e86c8dba5e23f3cd8cf8f40b40414097a51514e5fead61dcb88ff10d3676355c01e2040f3c68f6c24bfd2073da2e
-  languageName: node
-  linkType: hard
-
 "semver@npm:2 || 3 || 4 || 5, semver@npm:^5.5.0, semver@npm:^5.7.1":
   version: 5.7.1
   resolution: "semver@npm:5.7.1"
@@ -12747,6 +12746,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"test-app@workspace:apps/cli/test/app":
+  version: 0.0.0-use.local
+  resolution: "test-app@workspace:apps/cli/test/app"
+  dependencies:
+    "@types/express": ^4.17.13
+    express: ^4.18.1
+    typescript: ^4.7.4
+  languageName: unknown
+  linkType: soft
+
 "text-table@npm:^0.2.0":
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
@@ -12920,7 +12929,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^3.11.0, tsx@npm:^3.8.0":
+"tsx@npm:^3.8.0":
   version: 3.12.0
   resolution: "tsx@npm:3.12.0"
   dependencies:

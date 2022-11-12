@@ -1,7 +1,7 @@
 import { render } from "ink";
 import React from "react";
 import App from "./app";
-import { Options } from "./schema";
+import type { Options } from "./schema";
 
-export default async (options: Options) =>
+export const maiz = (options: Options) =>
 	render(<App options={options} />).waitUntilExit();

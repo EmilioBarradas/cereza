@@ -2,5 +2,5 @@
 	"$schema": "https://json.schemastore.org/nodemon.json",
 	"watch": ["src", "package.json", "tsconfig.json"],
 	"ext": "*",
-	"exec": "yarn build"
+	"exec": "yarn build || sleep 5 && touch package.json"
 }

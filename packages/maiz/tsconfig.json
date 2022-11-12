@@ -3,6 +3,8 @@
 		"strict": true,
 		"rootDir": "src",
 		"outDir": "dist",
+		"target": "ESNext",
+		"module": "CommonJS",
 		"declaration": true,
 		"esModuleInterop": true,
 		"jsx": "react"

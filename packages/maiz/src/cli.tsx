@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import meow from "meow";
-import maiz from ".";
+import { maiz } from ".";
 
 const HELP_MESSAGE = `
     Usage

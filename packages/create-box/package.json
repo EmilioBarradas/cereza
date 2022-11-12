@@ -1,0 +1,20 @@
+{
+	"name": "create-box",
+	"version": "0.0.0",
+	"type": "module",
+	"private": true,
+	"bin": "dist/index.js",
+	"scripts": {
+		"build": "shx rm -rf dist && tsc",
+		"dev": "nodemon"
+	},
+	"devDependencies": {
+		"shx": "^0.3.4"
+	},
+	"dependencies": {
+		"chalk": "^5.1.2",
+		"inquirer": "^9.1.4",
+		"maiz": "workspace:*"
+	},
+	"packageManager": "yarn@3.2.4"
+}
